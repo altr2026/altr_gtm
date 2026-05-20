@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>altr — find your stage</title>
+<meta name="description" content="K-content brands meet global stages. Get matched with venues and events looking for exactly what you do. Join the altr waitlist.">
+<meta name="theme-color" content="#f9f8f5">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="altr — find your stage">
+<meta property="og:description" content="K-content brands meet global stages. Get your first stage matches within 48 hours of launch.">
+<meta property="og:image" content="og-image.png">
+<meta property="og:url" content="https://altr.haus">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="altr — find your stage">
+<meta name="twitter:description" content="K-content brands meet global stages. Join the altr waitlist.">
+<meta name="twitter:image" content="og-image.png">
+
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#f9f8f5}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:#1a1a18;min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px;-webkit-font-smoothing:antialiased}
+.card{background:#fff;border-radius:16px;border:0.5px solid #e0dfd6;padding:2rem;max-width:520px;width:100%;box-shadow:0 1px 0 rgba(26,26,24,.02),0 12px 32px -16px rgba(26,26,24,.06)}
+
+.brand{display:flex;align-items:flex-end;gap:12px;margin-bottom:1.5rem}
+.brand .logo{height:30px;width:auto;display:block}
+.brand .tag{font-size:12px;color:#888780;padding-bottom:4px;letter-spacing:.2px}
+
+.side-toggle{display:flex;gap:0;border:0.5px solid #e0dfd6;border-radius:8px;overflow:hidden;margin-bottom:1.5rem}
+.side-btn{flex:1;padding:10px 0;font-size:13px;text-align:center;cursor:pointer;color:#888780;background:#fff;border:none;transition:all .15s;font-family:inherit}
+.side-btn.on{background:#f1efe8;color:#1a1a18;font-weight:500}
+
+.progress{display:flex;gap:4px;margin-bottom:1.5rem}
+.pip{flex:1;height:3px;border-radius:2px;background:#e0dfd6;transition:background .3s}
+.pip.done{background:#1a1a18}
+
+.pill{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;margin-bottom:.75rem;letter-spacing:.2px}
+.pill-teal{background:#e1f5ee;color:#085041}
+.pill-purple{background:#eeedfe;color:#3c3489}
+
+.q{font-size:20px;font-weight:500;line-height:1.35;margin-bottom:.5rem;letter-spacing:-.2px}
+.sub{font-size:13px;color:#888780;margin-bottom:1.25rem;line-height:1.5}
+
+.fomo{font-size:12px;color:#085041;background:#e1f5ee;border-radius:8px;padding:8px 12px;margin-bottom:1.25rem;display:flex;align-items:center;gap:8px;line-height:1.45}
+.dot{width:7px;height:7px;background:#38E709;border-radius:1.5px;flex-shrink:0;display:inline-block;box-shadow:0 0 0 2px rgba(56,231,9,.18)}
+.check{width:14px;height:14px;flex-shrink:0;display:inline-block;color:#085041}
+
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt-btn{background:#fff;border:0.5px solid #e0dfd6;border-radius:12px;padding:12px 16px;text-align:left;cursor:pointer;font-size:13px;color:#1a1a18;line-height:1.4;transition:all .15s;width:100%;font-family:inherit}
+.opt-btn:hover{border-color:#b4b2a9;background:#f9f8f5}
+.opt-btn.sel{border-color:#1a1a18;background:#f1efe8;font-weight:500}
+.opt-title{font-weight:500;margin-bottom:2px}
+.opt-sub{font-size:12px;color:#888780;font-weight:400}
+
+.inp{width:100%;font-size:14px;padding:10px 14px;border:0.5px solid #e0dfd6;border-radius:8px;background:#fff;color:#1a1a18;margin-bottom:8px;outline:none;font-family:inherit;transition:border-color .15s}
+.inp:focus{border-color:#888780}
+.inp.err{border-color:#a4321f}
+
+.nav{display:flex;justify-content:space-between;align-items:center;margin-top:1.25rem;gap:12px}
+.btn-next{font-size:13px;padding:9px 22px;border-radius:8px;border:0.5px solid #1a1a18;background:#1a1a18;color:#fff;cursor:pointer;font-family:inherit;font-weight:500;transition:opacity .15s}
+.btn-next:hover{opacity:.88}
+.btn-next:disabled{background:#e0dfd6;border-color:#e0dfd6;color:#888780;cursor:default;opacity:1}
+.btn-back{font-size:13px;padding:9px 16px;background:none;border:none;color:#888780;cursor:pointer;font-family:inherit}
+.btn-back:hover{color:#1a1a18}
+
+.errmsg{font-size:12px;color:#a4321f;margin-top:8px;line-height:1.4}
+
+.match-card{border:0.5px solid #e0dfd6;border-radius:12px;padding:1rem 1.25rem;margin-bottom:8px;display:flex;justify-content:space-between;align-items:center;gap:12px}
+.match-left{font-size:13px}
+.match-tag{font-size:11px;padding:2px 8px;border-radius:20px;background:#eeedfe;color:#3c3489;white-space:nowrap;flex-shrink:0}
+
+.foot{margin-top:1.5rem;padding-top:1rem;border-top:0.5px solid #e0dfd6;display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;color:#888780}
+.foot a{color:#888780;text-decoration:none;border-bottom:0.5px solid #e0dfd6}
+.foot a:hover{color:#1a1a18;border-color:#1a1a18}
+
+.screen{display:none}
+.screen.on{display:block}
+
+.refer-btn{margin-top:.75rem;font-size:12px;padding:8px 14px;border-radius:8px;border:0.5px solid #e0dfd6;background:#fff;color:#1a1a18;cursor:pointer;font-family:inherit;transition:all .15s}
+.refer-btn:hover{border-color:#1a1a18;background:#f1efe8}
+.refer-btn.copied{background:#e1f5ee;border-color:#085041;color:#085041}
+
+@media (max-width: 480px){
+  .card{padding:1.5rem;border-radius:14px}
+  .q{font-size:18px}
+  body{padding:12px}
+}
+</style>
+</head>
+<body>
+<div class="card">
+
+<header class="brand">
+  <img src="altr-mark-dark.png" alt="altr" class="logo">
+  <div class="tag">find your stage · be the stage</div>
+</header>
+
+<div class="side-toggle">
+  <button class="side-btn on" data-side="b" type="button" onclick="setSide('b')">K-content brand</button>
+  <button class="side-btn" data-side="v" type="button" onclick="setSide('v')">Global venue / event</button>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<!-- BRAND FLOW -->
+<div class="screen on" id="b0">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">Where is your brand right now?</div>
+  <div class="sub">We'll match you with stages already looking for exactly what you do.</div>
+  <div class="fomo"><span class="dot"></span><span>47 K-content brands are on the waitlist. 12 have active stage matches pending.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Korea-only, ready to go global</div><div class="opt-sub">We have the brand, we need the stage</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Already in 1–2 markets, want to expand</div><div class="opt-sub">We have some overseas presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Global already, want better stage curation</div><div class="opt-sub">We're active but matching is still manual</div></button>
+  </div>
+  <div class="nav"><span></span><button class="btn-next" id="b0-next" type="button" onclick="next('b',1)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="b1">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">What does your brand do?</div>
+  <div class="sub">This tells us which venues and events are already waiting for you.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">F&B — restaurant, food product, beverage</div><div class="opt-sub">e.g. Tiger Gimbap, Nongshim, Kakao Friends Cafe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Beauty / skincare / wellness</div><div class="opt-sub">e.g. Innisfree, Mediheal, Dr.Jart</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Fashion / streetwear / lifestyle</div><div class="opt-sub">e.g. Ader Error, Musinsa, Gentle Monster</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Entertainment / media / gaming IP</div><div class="opt-sub">e.g. Webtoon, HYBE IP, esports</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Tech / fintech / other</div><div class="opt-sub">B2B or consumer tech going global</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',0)">Back</button><button class="btn-next" id="b1-next" type="button" onclick="next('b',2)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="b2">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">Which market are you trying to enter first?</div>
+  <div class="sub">We'll show you what's already open in that market.</div>
+  <div class="fomo"><span class="dot"></span><span>Venues in Japan and UAE are actively requesting K-content partners right now.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Japan</div><div class="opt-sub">High K-content affinity, strong F&B and beauty demand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Southeast Asia (SG, TH, MY, ID)</div><div class="opt-sub">Fast-growing K-content consumer base</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">UAE / Saudi Arabia / GCC</div><div class="opt-sub">High spend, government-backed venue expansion</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Europe / US</div><div class="opt-sub">Hallyu wave momentum, premium positioning</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Open to recommendations</div><div class="opt-sub">Tell us our brand, we'll find the best fit market</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',1)">Back</button><button class="btn-next" id="b2-next" type="button" onclick="next('b',3)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="b3">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">What's your activation budget for one market entry?</div>
+  <div class="sub">This matches you with the right stage tier — pop-up pilot to full partnership.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">Under $10K — pop-up pilot</div><div class="opt-sub">Test and learn before committing</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$10K–$50K — activation</div><div class="opt-sub">Meaningful presence, measurable ROI</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$50K–$200K — partnership</div><div class="opt-sub">Season-long or multi-event presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$200K+ — anchor</div><div class="opt-sub">Category-defining stage presence</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',2)">Back</button><button class="btn-next" id="b3-next" type="button" onclick="next('b',4)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="b4">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">Biggest barrier right now?</div>
+  <div class="sub">This is what altr solves first for you.</div>
+  <div class="fomo"><span class="dot"></span><span>Most brands on our waitlist said exactly this — you're not alone.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Finding the right venue or event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Local execution — who runs the pop-up?</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Cross-border payments and contracts</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Proving ROI to get internal budget approved</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',3)">Back</button><button class="btn-next" id="b4-next" type="button" onclick="next('b',5)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="b5">
+  <span class="pill pill-teal">K-content brand</span>
+  <div class="q">Last step — how do we reach you?</div>
+  <div class="sub">We'll send your first stage matches within 48 hours of launch.</div>
+  <input class="inp" name="org" type="text" placeholder="Brand name" autocomplete="organization">
+  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
+  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  <div class="errmsg" id="b-err" hidden></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')">Get my stage matches →</button></div>
+</div>
+
+<div class="screen" id="b6">
+  <span class="pill pill-teal">You're on the list</span>
+  <div class="q">Here's what we matched for you</div>
+  <div class="sub">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
+  <div class="fomo">
+    <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>You're #48 on the K-content brand waitlist. First 20 matches open in 6 weeks.</span>
+  </div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780">Europe · 3 venues requesting K-F&amp;B</div></div><span class="match-tag">Strong fit</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780">Dubai · 2 properties open Q3</div></div><span class="match-tag">High demand</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Cultural festival · food village</div><div style="font-size:12px;color:#888780">Japan · 1 slot remaining</div></div><span class="match-tag">1 slot left</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem">Refer another K-brand and move up the list.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)">Copy share link</button>
+</div>
+
+<!-- VENUE FLOW -->
+<div class="screen" id="v0">
+  <span class="pill pill-purple">Global venue / event</span>
+  <div class="q">What kind of stage are you?</div>
+  <div class="sub">We'll match you with K-content brands already looking for your type of space.</div>
+  <div class="fomo"><span class="dot"></span><span>31 K-content brands on our waitlist are actively looking for a stage like yours.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Resort · hotel · lifestyle destination</div><div class="opt-sub">365-day venue with captive audience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Music festival · cultural event</div><div class="opt-sub">Annual or recurring live event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Mall · retail · mixed-use space</div><div class="opt-sub">High foot traffic, pop-up ready</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Arena · stadium · entertainment district</div><div class="opt-sub">Large-scale, GCC or APAC</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Conference · expo · trade show</div></button>
+  </div>
+  <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="v1">
+  <span class="pill pill-purple">Global venue / event</span>
+  <div class="q">Where are you located?</div>
+  <div class="sub">K-content brands have specific market priorities — let's see who's looking at your region.</div>
+  <div class="fomo"><span class="dot"></span><span>Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Japan</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Southeast Asia</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">UAE / Saudi Arabia / GCC</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Europe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Other / multiple markets</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="v2">
+  <span class="pill pill-purple">Global venue / event</span>
+  <div class="q">What kind of brand partner are you looking for?</div>
+  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-food or beverage pop-up</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-beauty or wellness activation</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-fashion or lifestyle brand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Sponsor with live activation budget</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Open — show us the full K-content range</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="v3">
+  <span class="pill pill-purple">Global venue / event</span>
+  <div class="q">How many activation slots in the next 12 months?</div>
+  <div class="sub">This tells us how many brand matches to line up for you.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">1–3 slots — selective and curated</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">4–10 slots — regular programming</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">10+ slots — we want ongoing partners</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Flexible — depends on the fit</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled>Next</button></div>
+</div>
+
+<div class="screen" id="v4">
+  <span class="pill pill-purple">Global venue / event</span>
+  <div class="q">Last step — let's connect.</div>
+  <div class="sub">We'll send your first K-content brand matches within 48 hours of launch.</div>
+  <input class="inp" name="org" type="text" placeholder="Venue / event name" autocomplete="organization">
+  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
+  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  <div class="errmsg" id="v-err" hidden></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+</div>
+
+<div class="screen" id="v5">
+  <span class="pill pill-purple">You're on the list</span>
+  <div class="q">Brands already waiting for your stage</div>
+  <div class="sub">These K-content categories have brands on our waitlist looking for your market.</div>
+  <div class="fomo">
+    <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span>Your venue is now visible to 31 K-content brands on the waitlist.</span>
+  </div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780">Budget $10–50K · first market entry</div></div><span class="match-tag">3 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780">Budget $10–50K · experience-led</div></div><span class="match-tag">2 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Large sponsor · live activation</div><div style="font-size:12px;color:#888780">Budget $200K+ · anchor partner</div></div><span class="match-tag">Intro available</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem">Know another venue that should be on altr? Refer them and we'll prioritise your first match.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)">Copy share link</button>
+</div>
+
+<footer class="foot">
+  <span>altr — find your stage · be the stage</span>
+  <a href="mailto:hello@altr.haus">hello@altr.haus</a>
+</footer>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = 'YOUR_SUPABASE_URL';
+const SUPABASE_ANON_KEY = 'YOUR_SUPABASE_ANON_KEY';
+
+const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.length > 30;
+const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
+
+const state = { side: 'b', answers: {} };
+const STEPS = { b: 6, v: 5 };
+const FINAL_FORM = { b: 5, v: 4 };
+const SUCCESS = { b: 6, v: 5 };
+
+const URL_PARAMS = (() => {
+  const p = new URLSearchParams(location.search), o = {};
+  for (const [k, v] of p) o[k] = v;
+  return o;
+})();
+
+const $ = id => document.getElementById(id);
+
+function setSide(s) {
+  if (state.side === s) return;
+  state.side = s;
+  state.answers = {};
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('on', b.dataset.side === s));
+  document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
+  $(s + '0').classList.add('on');
+  document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('[id$="-next"]').forEach(b => {
+    if (b.id !== s + '0-next' && b.id !== s + '-submit') b.setAttribute('disabled', '');
+  });
+  // Re-disable first-step next buttons too
+  const firstNext = $(s + '0-next');
+  if (firstNext) firstNext.setAttribute('disabled', '');
+  renderProgress(s, 0);
+}
+
+function renderProgress(s, step) {
+  const total = STEPS[s], bar = $('progress');
+  bar.innerHTML = '';
+  for (let i = 0; i < total; i++) {
+    const d = document.createElement('div');
+    d.className = 'pip' + (i <= step ? ' done' : '');
+    bar.appendChild(d);
+  }
+}
+
+function pick(el, sid) {
+  el.closest('.opts').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  const title = el.querySelector('.opt-title');
+  state.answers[sid] = (title ? title.textContent : el.textContent).trim();
+  const nb = $(sid + '-next');
+  if (nb) nb.removeAttribute('disabled');
+}
+
+function next(s, step) {
+  $(s + (step - 1)).classList.remove('on');
+  $(s + step).classList.add('on');
+  if (step < SUCCESS[s]) renderProgress(s, step);
+  else renderProgress(s, STEPS[s] - 1);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function back(s, step) {
+  $(s + (step + 1)).classList.remove('on');
+  $(s + step).classList.add('on');
+  renderProgress(s, step);
+}
+
+async function submit(s) {
+  const screen = $(s + FINAL_FORM[s]);
+  const orgEl = screen.querySelector('input[name="org"]');
+  const nameEl = screen.querySelector('input[name="name"]');
+  const emailEl = screen.querySelector('input[name="email"]');
+  const errEl = $(s + '-err');
+  const btn = $(s + '-submit');
+
+  [orgEl, nameEl, emailEl].forEach(el => el.classList.remove('err'));
+  errEl.hidden = true;
+
+  const org = orgEl.value.trim();
+  const name = nameEl.value.trim();
+  const email = emailEl.value.trim();
+
+  const showErr = (msg, el) => {
+    errEl.textContent = msg;
+    errEl.hidden = false;
+    if (el) { el.classList.add('err'); el.focus(); }
+  };
+
+  if (!org) return showErr(s === 'b' ? 'Please enter your brand name.' : 'Please enter your venue or event name.', orgEl);
+  if (!name) return showErr('Please enter your name and role.', nameEl);
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return showErr('Please enter a valid work email.', emailEl);
+
+  const originalText = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = 'Saving…';
+
+  const payload = {
+    mode: s === 'b' ? 'brand' : 'venue',
+    org_name: org,
+    contact_name: name,
+    email,
+    answers: { ...state.answers },
+    utm: URL_PARAMS,
+    user_agent: navigator.userAgent.slice(0, 240),
+    referrer: document.referrer || null,
+    submitted_at: new Date().toISOString()
+  };
+
+  let saved = false;
+  if (sb) {
+    try {
+      const { error } = await sb.from('gtm_waitlist').insert(payload);
+      if (!error) saved = true;
+      else console.warn('supabase insert error', error);
+    } catch (e) {
+      console.warn('supabase exception', e);
+    }
+  }
+
+  if (!saved) {
+    const subj = `altr waitlist — ${payload.mode} — ${org}`;
+    const body = `New ${payload.mode} signup\n\n` +
+      `Org: ${org}\nContact: ${name}\nEmail: ${email}\n\n` +
+      `Answers:\n${Object.entries(state.answers).map(([k, v]) => `  ${k}: ${v}`).join('\n')}\n\n` +
+      `UTM: ${JSON.stringify(URL_PARAMS)}\n` +
+      `Referrer: ${payload.referrer || '(none)'}\n` +
+      `Submitted: ${payload.submitted_at}`;
+    const mailto = `mailto:hello@altr.haus?subject=${encodeURIComponent(subj)}&body=${encodeURIComponent(body)}`;
+    const w = window.open(mailto, '_blank');
+    if (!w) location.href = mailto;
+  }
+
+  btn.disabled = false;
+  btn.textContent = originalText;
+  next(s, SUCCESS[s]);
+}
+
+function copyShare(btn) {
+  const url = location.origin + location.pathname;
+  const done = () => {
+    btn.classList.add('copied');
+    const original = btn.textContent;
+    btn.textContent = 'Link copied ✓';
+    setTimeout(() => { btn.classList.remove('copied'); btn.textContent = original; }, 2400);
+  };
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(done).catch(() => {
+      const ta = document.createElement('textarea');
+      ta.value = url; document.body.appendChild(ta); ta.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+      document.body.removeChild(ta);
+    });
+  }
+}
+
+// Read ?side=brand|venue deep links
+(function init() {
+  const wantSide = URL_PARAMS.side;
+  if (wantSide === 'venue' || wantSide === 'v') setSide('v');
+  else renderProgress('b', 0);
+})();
+</script>
+</body>
+</html>
