@@ -45,10 +45,15 @@
 html,body{background:var(--bg)}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01'}
 
-.topbar{display:flex;align-items:center;gap:14px;padding:24px 32px;position:relative;z-index:2}
-.topbar-logo{height:22px;width:auto;display:block}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:24px 32px;position:relative;z-index:2}
+.topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
+.topbar-logo{height:22px;width:auto;display:block;flex-shrink:0}
 .topbar-tag{font-size:12px;color:var(--text-2);letter-spacing:.2px;padding-top:1px}
-@media (max-width:480px){.topbar{padding:18px 20px;gap:10px}.topbar-tag{display:none}}
+.lang-toggle{display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:rgba(255,255,255,.02);flex-shrink:0}
+.lang-btn{padding:7px 12px;font-size:11px;letter-spacing:.4px;color:var(--text-3);background:transparent;border:none;cursor:pointer;font-family:inherit;font-weight:600;transition:all .15s}
+.lang-btn:hover{color:var(--text-2)}
+.lang-btn.on{background:rgba(255,255,255,.06);color:var(--text)}
+@media (max-width:480px){.topbar{padding:18px 20px;gap:10px}.topbar-tag{display:none}.lang-btn{padding:6px 10px}}
 
 .page{display:flex;flex-direction:column;align-items:center;gap:40px;width:100%;max-width:520px;margin:0 auto;padding:32px 24px 64px}
 .hero{display:none}
@@ -150,215 +155,221 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <body>
 
 <header class="topbar">
-  <img src="altr-logo-white.png" alt="altr" class="topbar-logo">
-  <div class="topbar-tag">find your stage · be the stage</div>
+  <div class="topbar-left">
+    <img src="altr-logo-white.png" alt="altr" class="topbar-logo">
+    <div class="topbar-tag" data-kr="스테이지를 찾아라 · 스테이지가 되어라">find your stage · be the stage</div>
+  </div>
+  <div class="lang-toggle" role="group" aria-label="language">
+    <button class="lang-btn on" type="button" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" type="button" data-lang="kr" onclick="setLang('kr')">KR</button>
+  </div>
 </header>
 
 <div class="page">
 
 <aside class="hero">
   <h1 class="hero-h1">
-    <span class="ln1">Find your stage.</span>
-    <span class="ln2">Be the stage.</span>
+    <span class="ln1" data-kr="스테이지를 찾아라.">Find your stage.</span>
+    <span class="ln2" data-kr="스테이지가 되어라.">Be the stage.</span>
   </h1>
-  <p class="hero-lede">altr matches K-content brands with global venues and events &mdash; by mandate, not catalogue. First matches go live 6 weeks from launch.</p>
+  <p class="hero-lede" data-kr="altr 은 K-콘텐츠 브랜드와 글로벌 venue/이벤트를 카탈로그가 아닌 매칭으로 연결합니다. 첫 매칭은 런칭 후 6주에 공개.">altr matches K-content brands with global venues and events &mdash; by mandate, not catalogue. First matches go live 6 weeks from launch.</p>
   <div class="hero-pairs">
-    <div class="hero-pair"><span class="pdot teal"></span><div><b>K-content brand</b> <span>&middot; find venues already asking for your category</span></div></div>
-    <div class="hero-pair"><span class="pdot purple"></span><div><b>Global venue / event</b> <span>&middot; discover brands ready to activate in your market</span></div></div>
+    <div class="hero-pair"><span class="pdot teal"></span><div><b data-kr="K-콘텐츠 브랜드">K-content brand</b> <span data-kr="· 너의 카테고리를 이미 찾는 venue 발견">&middot; find venues already asking for your category</span></div></div>
+    <div class="hero-pair"><span class="pdot purple"></span><div><b data-kr="글로벌 venue / 이벤트">Global venue / event</b> <span data-kr="· 너의 마켓에서 활동 준비된 브랜드 발견">&middot; discover brands ready to activate in your market</span></div></div>
   </div>
 </aside>
 
 <div class="card">
 
 <div class="side-toggle">
-  <button class="side-btn on" data-side="b" type="button" onclick="setSide('b')">K-content brand</button>
-  <button class="side-btn" data-side="v" type="button" onclick="setSide('v')">Global venue / event</button>
+  <button class="side-btn on" data-side="b" type="button" onclick="setSide('b')" data-kr="K-콘텐츠 브랜드">K-content brand</button>
+  <button class="side-btn" data-side="v" type="button" onclick="setSide('v')" data-kr="글로벌 venue / 이벤트">Global venue / event</button>
 </div>
 
 <div class="progress" id="progress"></div>
 
 <!-- BRAND FLOW -->
 <div class="screen on" id="b0">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">Where is your brand right now?</div>
-  <div class="sub">We'll match you with stages already looking for exactly what you do.</div>
-  <div class="fomo"><span class="dot"></span><span>47 K-content brands are on the waitlist. 12 have active stage matches pending.</span></div>
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="지금 브랜드는 어느 단계인가요?">Where is your brand right now?</div>
+  <div class="sub" data-kr="당신의 카테고리를 찾고 있는 스테이지와 매칭해드립니다.">We'll match you with stages already looking for exactly what you do.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="47개 K-콘텐츠 브랜드가 대기 중. 12개는 매칭 진행 중.">47 K-content brands are on the waitlist. 12 have active stage matches pending.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Korea-only, ready to go global</div><div class="opt-sub">We have the brand, we need the stage</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Already in 1–2 markets, want to expand</div><div class="opt-sub">We have some overseas presence</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title">Global already, want better stage curation</div><div class="opt-sub">We're active but matching is still manual</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="한국 내 활동, 글로벌 진출 준비">Korea-only, ready to go global</div><div class="opt-sub" data-kr="브랜드는 있고, 스테이지가 필요">We have the brand, we need the stage</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="이미 1–2개 마켓 진출, 확장 원함">Already in 1–2 markets, want to expand</div><div class="opt-sub" data-kr="약간의 해외 진출 경험 있음">We have some overseas presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="이미 글로벌, 더 나은 스테이지 큐레이션 원함">Global already, want better stage curation</div><div class="opt-sub" data-kr="활동 중이지만 매칭은 여전히 수동">We're active but matching is still manual</div></button>
   </div>
-  <div class="nav"><span></span><button class="btn-next" id="b0-next" type="button" onclick="next('b',1)" disabled>Next</button></div>
+  <div class="nav"><span></span><button class="btn-next" id="b0-next" type="button" onclick="next('b',1)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b1">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">What does your brand do?</div>
-  <div class="sub">This tells us which venues and events are already waiting for you.</div>
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="브랜드의 비즈니스 영역은?">What does your brand do?</div>
+  <div class="sub" data-kr="이미 너를 기다리는 venue 와 이벤트를 알려줍니다.">This tells us which venues and events are already waiting for you.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">F&B — restaurant, food product, beverage</div><div class="opt-sub">e.g. Tiger Gimbap, Nongshim, Kakao Friends Cafe</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Beauty / skincare / wellness</div><div class="opt-sub">e.g. Innisfree, Mediheal, Dr.Jart</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Fashion / streetwear / lifestyle</div><div class="opt-sub">e.g. Ader Error, Musinsa, Gentle Monster</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Entertainment / media / gaming IP</div><div class="opt-sub">e.g. Webtoon, HYBE IP, esports</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title">Tech / fintech / other</div><div class="opt-sub">B2B or consumer tech going global</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="F&B — 레스토랑, 식품, 음료">F&B — restaurant, food product, beverage</div><div class="opt-sub" data-kr="예: 타이거김밥, 농심, 카카오프렌즈카페">e.g. Tiger Gimbap, Nongshim, Kakao Friends Cafe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="뷰티 / 스킨케어 / 웰니스">Beauty / skincare / wellness</div><div class="opt-sub" data-kr="예: 이니스프리, 메디힐, 닥터자르트">e.g. Innisfree, Mediheal, Dr.Jart</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="패션 / 스트릿웨어 / 라이프스타일">Fashion / streetwear / lifestyle</div><div class="opt-sub" data-kr="예: 아더에러, 무신사, 젠틀몬스터">e.g. Ader Error, Musinsa, Gentle Monster</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="엔터테인먼트 / 미디어 / 게이밍 IP">Entertainment / media / gaming IP</div><div class="opt-sub" data-kr="예: 웹툰, HYBE IP, e스포츠">e.g. Webtoon, HYBE IP, esports</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="테크 / 핀테크 / 기타">Tech / fintech / other</div><div class="opt-sub" data-kr="글로벌 진출 중인 B2B 또는 소비자 테크">B2B or consumer tech going global</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',0)">Back</button><button class="btn-next" id="b1-next" type="button" onclick="next('b',2)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',0)" data-kr="이전">Back</button><button class="btn-next" id="b1-next" type="button" onclick="next('b',2)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b2">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">Which market are you trying to enter first?</div>
-  <div class="sub">We'll show you what's already open in that market.</div>
-  <div class="fomo"><span class="dot"></span><span>Venues in Japan and UAE are actively requesting K-content partners right now.</span></div>
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="첫 진출 마켓은?">Which market are you trying to enter first?</div>
+  <div class="sub" data-kr="해당 마켓에서 이미 오픈된 기회를 보여드립니다.">We'll show you what's already open in that market.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="일본과 UAE 의 venue 들이 지금 K-콘텐츠 파트너를 적극 찾고 있습니다.">Venues in Japan and UAE are actively requesting K-content partners right now.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Japan</div><div class="opt-sub">High K-content affinity, strong F&B and beauty demand</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Southeast Asia (SG, TH, MY, ID)</div><div class="opt-sub">Fast-growing K-content consumer base</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">UAE / Saudi Arabia / GCC</div><div class="opt-sub">High spend, government-backed venue expansion</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Europe / US</div><div class="opt-sub">Hallyu wave momentum, premium positioning</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title">Open to recommendations</div><div class="opt-sub">Tell us our brand, we'll find the best fit market</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="일본">Japan</div><div class="opt-sub" data-kr="K-콘텐츠 친화도 높음, F&B 와 뷰티 수요 강함">High K-content affinity, strong F&B and beauty demand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="동남아 (싱가포르, 태국, 말레이시아, 인도네시아)">Southeast Asia (SG, TH, MY, ID)</div><div class="opt-sub" data-kr="빠르게 성장하는 K-콘텐츠 소비자층">Fast-growing K-content consumer base</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div><div class="opt-sub" data-kr="고소비, 정부 주도 venue 확장">High spend, government-backed venue expansion</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="유럽 / 미국">Europe / US</div><div class="opt-sub" data-kr="한류 모멘텀, 프리미엄 포지셔닝">Hallyu wave momentum, premium positioning</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="추천 받기">Open to recommendations</div><div class="opt-sub" data-kr="브랜드 알려주시면 베스트 핏 마켓 찾아드립니다">Tell us our brand, we'll find the best fit market</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',1)">Back</button><button class="btn-next" id="b2-next" type="button" onclick="next('b',3)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',1)" data-kr="이전">Back</button><button class="btn-next" id="b2-next" type="button" onclick="next('b',3)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b3">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">What's your activation budget for one market entry?</div>
-  <div class="sub">This matches you with the right stage tier — pop-up pilot to full partnership.</div>
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="한 마켓 진출 예산은?">What's your activation budget for one market entry?</div>
+  <div class="sub" data-kr="예산에 맞는 스테이지 티어 매칭 — 팝업 파일럿부터 풀 파트너십까지.">This matches you with the right stage tier — pop-up pilot to full partnership.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">Under $10K — pop-up pilot</div><div class="opt-sub">Test and learn before committing</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$10K–$50K — activation</div><div class="opt-sub">Meaningful presence, measurable ROI</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$50K–$200K — partnership</div><div class="opt-sub">Season-long or multi-event presence</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title">$200K+ — anchor</div><div class="opt-sub">Category-defining stage presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="$10K 미만 — 팝업 파일럿">Under $10K — pop-up pilot</div><div class="opt-sub" data-kr="본격 투자 전 테스트">Test and learn before committing</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="$10K–$50K — 액티베이션">$10K–$50K — activation</div><div class="opt-sub" data-kr="의미 있는 존재감, 측정 가능한 ROI">Meaningful presence, measurable ROI</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="$50K–$200K — 파트너십">$50K–$200K — partnership</div><div class="opt-sub" data-kr="시즌 단위 또는 멀티-이벤트 참여">Season-long or multi-event presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="$200K+ — 앵커">$200K+ — anchor</div><div class="opt-sub" data-kr="카테고리를 정의하는 스테이지 존재감">Category-defining stage presence</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',2)">Back</button><button class="btn-next" id="b3-next" type="button" onclick="next('b',4)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',2)" data-kr="이전">Back</button><button class="btn-next" id="b3-next" type="button" onclick="next('b',4)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b4">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">Biggest barrier right now?</div>
-  <div class="sub">This is what altr solves first for you.</div>
-  <div class="fomo"><span class="dot"></span><span>Most brands on our waitlist said exactly this — you're not alone.</span></div>
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="지금 가장 큰 장벽은?">Biggest barrier right now?</div>
+  <div class="sub" data-kr="altr 이 가장 먼저 해결해드릴 부분입니다.">This is what altr solves first for you.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="대기리스트의 대다수 브랜드가 같은 답을 했어요 — 혼자가 아닙니다.">Most brands on our waitlist said exactly this — you're not alone.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Finding the right venue or event</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Local execution — who runs the pop-up?</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Cross-border payments and contracts</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title">Proving ROI to get internal budget approved</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="맞는 venue/이벤트 찾기">Finding the right venue or event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="현지 실행 — 누가 팝업 운영하나">Local execution — who runs the pop-up?</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="국경 간 결제 및 계약">Cross-border payments and contracts</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="내부 예산 승인을 위한 ROI 증명">Proving ROI to get internal budget approved</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',3)">Back</button><button class="btn-next" id="b4-next" type="button" onclick="next('b',5)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',3)" data-kr="이전">Back</button><button class="btn-next" id="b4-next" type="button" onclick="next('b',5)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b5">
-  <span class="pill pill-teal">K-content brand</span>
-  <div class="q">Last step — how do we reach you?</div>
-  <div class="sub">We'll send your first stage matches within 48 hours of launch.</div>
-  <input class="inp" name="org" type="text" placeholder="Brand name" autocomplete="organization">
-  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
-  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="마지막 단계 — 연락처 알려주세요">Last step — how do we reach you?</div>
+  <div class="sub" data-kr="런칭 후 48시간 내 첫 스테이지 매칭 발송.">We'll send your first stage matches within 48 hours of launch.</div>
+  <input class="inp" name="org" type="text" placeholder="Brand name" autocomplete="organization" data-kr-placeholder="브랜드명">
+  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name" data-kr-placeholder="이름 + 직책">
+  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email" data-kr-placeholder="업무 이메일">
   <div class="errmsg" id="b-err" hidden></div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')">Get my stage matches →</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')" data-kr="내 스테이지 매칭 받기 →">Get my stage matches →</button></div>
 </div>
 
 <div class="screen" id="b6">
-  <span class="pill pill-teal">You're on the list</span>
-  <div class="q">Here's what we matched for you</div>
-  <div class="sub">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
+  <span class="pill pill-teal" data-kr="대기리스트 등록 완료">You're on the list</span>
+  <div class="q" data-kr="당신을 위한 매칭">Here's what we matched for you</div>
+  <div class="sub" data-kr="지금 K-콘텐츠 브랜드를 적극 찾고 있는 스테이지. 런칭 시 구체적 매칭 발송.">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
   <div class="fomo">
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>You're #48 on the K-content brand waitlist. First 20 matches open in 6 weeks.</span>
+    <span data-kr="K-콘텐츠 브랜드 대기리스트 #48번. 첫 20개 매칭은 6주 후 오픈.">You're #48 on the K-content brand waitlist. First 20 matches open in 6 weeks.</span>
   </div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780">Europe · 3 venues requesting K-F&amp;B</div></div><span class="match-tag">Strong fit</span></div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780">Dubai · 2 properties open Q3</div></div><span class="match-tag">High demand</span></div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Cultural festival · food village</div><div style="font-size:12px;color:#888780">Japan · 1 slot remaining</div></div><span class="match-tag">1 slot left</span></div>
-  <div style="font-size:12px;color:#888780;margin-top:1rem">Refer another K-brand and move up the list.</div>
-  <button class="refer-btn" type="button" onclick="copyShare(this)">Copy share link</button>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="라이프스타일 리조트 · 알프스 / 스키">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780" data-kr="유럽 · 3개 venue 가 K-F&B 요청">Europe · 3 venues requesting K-F&amp;B</div></div><span class="match-tag" data-kr="높은 적합도">Strong fit</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="럭셔리 호텔 · 팝업 슬롯">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780" data-kr="두바이 · 2개 프로퍼티 Q3 오픈">Dubai · 2 properties open Q3</div></div><span class="match-tag" data-kr="높은 수요">High demand</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="문화 페스티벌 · 푸드 빌리지">Cultural festival · food village</div><div style="font-size:12px;color:#888780" data-kr="일본 · 1슬롯 남음">Japan · 1 slot remaining</div></div><span class="match-tag" data-kr="1슬롯 남음">1 slot left</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem" data-kr="다른 K-브랜드를 추천하고 순번을 앞당기세요.">Refer another K-brand and move up the list.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)" data-kr="공유 링크 복사">Copy share link</button>
 </div>
 
 <!-- VENUE FLOW -->
 <div class="screen" id="v0">
-  <span class="pill pill-purple">Global venue / event</span>
-  <div class="q">What kind of stage are you?</div>
-  <div class="sub">We'll match you with K-content brands already looking for your type of space.</div>
-  <div class="fomo"><span class="dot"></span><span>31 K-content brands on our waitlist are actively looking for a stage like yours.</span></div>
+  <span class="pill pill-purple" data-kr="글로벌 venue / 이벤트">Global venue / event</span>
+  <div class="q" data-kr="어떤 종류의 스테이지인가요?">What kind of stage are you?</div>
+  <div class="sub" data-kr="이미 너의 공간 타입을 찾는 K-콘텐츠 브랜드와 매칭해드립니다.">We'll match you with K-content brands already looking for your type of space.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="대기리스트의 31개 K-콘텐츠 브랜드가 너 같은 스테이지를 적극 찾고 있습니다.">31 K-content brands on our waitlist are actively looking for a stage like yours.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Resort · hotel · lifestyle destination</div><div class="opt-sub">365-day venue with captive audience</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Music festival · cultural event</div><div class="opt-sub">Annual or recurring live event</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Mall · retail · mixed-use space</div><div class="opt-sub">High foot traffic, pop-up ready</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Arena · stadium · entertainment district</div><div class="opt-sub">Large-scale, GCC or APAC</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Conference · expo · trade show</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="리조트 · 호텔 · 라이프스타일 데스티네이션">Resort · hotel · lifestyle destination</div><div class="opt-sub" data-kr="365일 운영, 고정 오디언스 보유">365-day venue with captive audience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="음악 페스티벌 · 문화 이벤트">Music festival · cultural event</div><div class="opt-sub" data-kr="연 1회 또는 정기 라이브 이벤트">Annual or recurring live event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="몰 · 리테일 · 복합 공간">Mall · retail · mixed-use space</div><div class="opt-sub" data-kr="높은 유동인구, 팝업 가능">High foot traffic, pop-up ready</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="아레나 · 스타디움 · 엔터테인먼트 디스트릭트">Arena · stadium · entertainment district</div><div class="opt-sub" data-kr="대규모, GCC 또는 APAC">Large-scale, GCC or APAC</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="컨퍼런스 · 엑스포 · 트레이드쇼">Conference · expo · trade show</div></button>
   </div>
-  <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled>Next</button></div>
+  <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="v1">
-  <span class="pill pill-purple">Global venue / event</span>
-  <div class="q">Where are you located?</div>
-  <div class="sub">K-content brands have specific market priorities — let's see who's looking at your region.</div>
-  <div class="fomo"><span class="dot"></span><span>Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
+  <span class="pill pill-purple" data-kr="글로벌 venue / 이벤트">Global venue / event</span>
+  <div class="q" data-kr="어디에 위치해 있나요?">Where are you located?</div>
+  <div class="sub" data-kr="K-콘텐츠 브랜드들은 마켓 우선순위가 명확합니다 — 너의 지역을 보는 브랜드를 알려드립니다.">K-content brands have specific market priorities — let's see who's looking at your region.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="일본과 UAE 가 대기리스트 K-콘텐츠 브랜드가 가장 많이 요청하는 마켓입니다.">Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Japan</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Southeast Asia</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">UAE / Saudi Arabia / GCC</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Europe</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Other / multiple markets</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="일본">Japan</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="동남아">Southeast Asia</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="유럽">Europe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="기타 / 복수 마켓">Other / multiple markets</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)" data-kr="이전">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="v2">
-  <span class="pill pill-purple">Global venue / event</span>
-  <div class="q">What kind of brand partner are you looking for?</div>
-  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
+  <span class="pill pill-purple" data-kr="글로벌 venue / 이벤트">Global venue / event</span>
+  <div class="q" data-kr="어떤 브랜드 파트너를 찾고 있나요?">What kind of brand partner are you looking for?</div>
+  <div class="sub" data-kr="오디언스와 프로그래밍 니즈에 맞는 대기리스트 브랜드를 우선 매칭해드립니다.">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-food or beverage pop-up</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-beauty or wellness activation</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-fashion or lifestyle brand</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Sponsor with live activation budget</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Open — show us the full K-content range</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-푸드 또는 음료 팝업">K-food or beverage pop-up</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-뷰티 또는 웰니스 액티베이션">K-beauty or wellness activation</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-패션 또는 라이프스타일 브랜드">K-fashion or lifestyle brand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="라이브 액티베이션 예산 보유한 스폰서">Sponsor with live activation budget</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="오픈 — 전체 K-콘텐츠 카테고리 보고 싶음">Open — show us the full K-content range</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)" data-kr="이전">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="v3">
-  <span class="pill pill-purple">Global venue / event</span>
-  <div class="q">How many activation slots in the next 12 months?</div>
-  <div class="sub">This tells us how many brand matches to line up for you.</div>
+  <span class="pill pill-purple" data-kr="글로벌 venue / 이벤트">Global venue / event</span>
+  <div class="q" data-kr="향후 12개월간 액티베이션 슬롯 수는?">How many activation slots in the next 12 months?</div>
+  <div class="sub" data-kr="몇 개의 브랜드 매칭을 준비할지 알려줍니다.">This tells us how many brand matches to line up for you.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">1–3 slots — selective and curated</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">4–10 slots — regular programming</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">10+ slots — we want ongoing partners</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Flexible — depends on the fit</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title" data-kr="1–3슬롯 — 선별적, 큐레이션 중심">1–3 slots — selective and curated</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title" data-kr="4–10슬롯 — 정기 프로그래밍">4–10 slots — regular programming</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title" data-kr="10+슬롯 — 지속적 파트너 원함">10+ slots — we want ongoing partners</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title" data-kr="유연 — 적합도에 따라">Flexible — depends on the fit</div></button>
   </div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled>Next</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)" data-kr="이전">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="v4">
-  <span class="pill pill-purple">Global venue / event</span>
-  <div class="q">Last step — let's connect.</div>
-  <div class="sub">We'll send your first K-content brand matches within 48 hours of launch.</div>
-  <input class="inp" name="org" type="text" placeholder="Venue / event name" autocomplete="organization">
-  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
-  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  <span class="pill pill-purple" data-kr="글로벌 venue / 이벤트">Global venue / event</span>
+  <div class="q" data-kr="마지막 단계 — 연결합시다.">Last step — let's connect.</div>
+  <div class="sub" data-kr="런칭 후 48시간 내 첫 K-콘텐츠 브랜드 매칭 발송.">We'll send your first K-content brand matches within 48 hours of launch.</div>
+  <input class="inp" name="org" type="text" placeholder="Venue / event name" autocomplete="organization" data-kr-placeholder="venue / 이벤트명">
+  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name" data-kr-placeholder="이름 + 직책">
+  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email" data-kr-placeholder="업무 이메일">
   <div class="errmsg" id="v-err" hidden></div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)" data-kr="이전">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')" data-kr="내 K-콘텐츠 매칭 찾기 →">Find my K-content matches →</button></div>
 </div>
 
 <div class="screen" id="v5">
-  <span class="pill pill-purple">You're on the list</span>
-  <div class="q">Brands already waiting for your stage</div>
-  <div class="sub">These K-content categories have brands on our waitlist looking for your market.</div>
+  <span class="pill pill-purple" data-kr="대기리스트 등록 완료">You're on the list</span>
+  <div class="q" data-kr="이미 너의 스테이지를 기다리는 브랜드">Brands already waiting for your stage</div>
+  <div class="sub" data-kr="대기리스트의 이 K-콘텐츠 카테고리 브랜드들이 너의 마켓을 찾고 있습니다.">These K-content categories have brands on our waitlist looking for your market.</div>
   <div class="fomo">
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>Your venue is now visible to 31 K-content brands on the waitlist.</span>
+    <span data-kr="너의 venue 가 대기리스트 31개 K-콘텐츠 브랜드에게 노출됨.">Your venue is now visible to 31 K-content brands on the waitlist.</span>
   </div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780">Budget $10–50K · first market entry</div></div><span class="match-tag">3 brands</span></div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780">Budget $10–50K · experience-led</div></div><span class="match-tag">2 brands</span></div>
-  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Large sponsor · live activation</div><div style="font-size:12px;color:#888780">Budget $200K+ · anchor partner</div></div><span class="match-tag">Intro available</span></div>
-  <div style="font-size:12px;color:#888780;margin-top:1rem">Know another venue that should be on altr? Refer them and we'll prioritise your first match.</div>
-  <button class="refer-btn" type="button" onclick="copyShare(this)">Copy share link</button>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-F&B 브랜드 · 런칭 준비 완료">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 첫 마켓 진출">Budget $10–50K · first market entry</div></div><span class="match-tag" data-kr="3개 브랜드">3 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-뷰티 브랜드 · 액티베이션 준비">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 체험 중심">Budget $10–50K · experience-led</div></div><span class="match-tag" data-kr="2개 브랜드">2 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="대형 스폰서 · 라이브 액티베이션">Large sponsor · live activation</div><div style="font-size:12px;color:#888780" data-kr="예산 $200K+ · 앵커 파트너">Budget $200K+ · anchor partner</div></div><span class="match-tag" data-kr="소개 가능">Intro available</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem" data-kr="altr 에 등록되어야 할 다른 venue 를 알고 계신가요? 추천하시면 너의 첫 매칭을 우선 처리합니다.">Know another venue that should be on altr? Refer them and we'll prioritise your first match.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)" data-kr="공유 링크 복사">Copy share link</button>
 </div>
 
 <footer class="foot">
-  <span>altr — find your stage · be the stage</span>
+  <span data-kr="altr — 스테이지를 찾아라 · 스테이지가 되어라">altr — find your stage · be the stage</span>
   <a href="mailto:hello@altr.haus">hello@altr.haus</a>
 </footer>
 
@@ -374,7 +385,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_CnnNRwyEkOvE321po-hzDQ_gJjIZu3O';
 const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.length > 30;
 const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-const state = { side: 'b', answers: {} };
+const state = { side: 'b', answers: {}, lang: 'en' };
 const STEPS = { b: 6, v: 5 };
 const FINAL_FORM = { b: 5, v: 4 };
 const SUCCESS = { b: 6, v: 5 };
@@ -386,6 +397,47 @@ const URL_PARAMS = (() => {
 })();
 
 const $ = id => document.getElementById(id);
+
+// ---------- i18n ----------
+const i18n = {
+  en: {
+    saving: 'Saving…',
+    linkCopied: 'Link copied ✓',
+    err_brand: 'Please enter your brand name.',
+    err_venue: 'Please enter your venue or event name.',
+    err_name: 'Please enter your name and role.',
+    err_email: 'Please enter a valid work email.'
+  },
+  kr: {
+    saving: '저장 중…',
+    linkCopied: '링크 복사됨 ✓',
+    err_brand: '브랜드명을 입력해주세요.',
+    err_venue: 'venue 또는 이벤트명을 입력해주세요.',
+    err_name: '이름과 직책을 입력해주세요.',
+    err_email: '유효한 업무 이메일을 입력해주세요.'
+  }
+};
+
+function t(key) { return (i18n[state.lang] || i18n.en)[key]; }
+
+function setLang(lang) {
+  if (lang !== 'en' && lang !== 'kr') lang = 'en';
+  state.lang = lang;
+  document.documentElement.lang = lang === 'kr' ? 'ko' : 'en';
+  // toggle button states
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('on', b.dataset.lang === lang));
+  // text content
+  document.querySelectorAll('[data-kr]').forEach(el => {
+    if (!el.dataset.en) el.dataset.en = el.innerHTML;
+    el.innerHTML = lang === 'kr' ? el.dataset.kr : el.dataset.en;
+  });
+  // placeholders
+  document.querySelectorAll('[data-kr-placeholder]').forEach(el => {
+    if (!el.dataset.enPlaceholder) el.dataset.enPlaceholder = el.placeholder || '';
+    el.placeholder = lang === 'kr' ? el.dataset.krPlaceholder : el.dataset.enPlaceholder;
+  });
+  try { localStorage.setItem('altr_lang', lang); } catch (e) {}
+}
 
 function setSide(s) {
   if (state.side === s) return;
@@ -458,13 +510,13 @@ async function submit(s) {
     if (el) { el.classList.add('err'); el.focus(); }
   };
 
-  if (!org) return showErr(s === 'b' ? 'Please enter your brand name.' : 'Please enter your venue or event name.', orgEl);
-  if (!name) return showErr('Please enter your name and role.', nameEl);
-  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return showErr('Please enter a valid work email.', emailEl);
+  if (!org) return showErr(s === 'b' ? t('err_brand') : t('err_venue'), orgEl);
+  if (!name) return showErr(t('err_name'), nameEl);
+  if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return showErr(t('err_email'), emailEl);
 
   const originalText = btn.textContent;
   btn.disabled = true;
-  btn.textContent = 'Saving…';
+  btn.textContent = t('saving');
 
   const payload = {
     mode: s === 'b' ? 'brand' : 'venue',
@@ -512,7 +564,7 @@ function copyShare(btn) {
   const done = () => {
     btn.classList.add('copied');
     const original = btn.textContent;
-    btn.textContent = 'Link copied ✓';
+    btn.textContent = t('linkCopied');
     setTimeout(() => { btn.classList.remove('copied'); btn.textContent = original; }, 2400);
   };
   if (navigator.clipboard && navigator.clipboard.writeText) {
@@ -527,6 +579,18 @@ function copyShare(btn) {
 
 // Read ?side=brand|venue deep links
 (function init() {
+  // Language: ?lang= > localStorage > browser > 'en'
+  let lang = (URL_PARAMS.lang || '').toLowerCase();
+  if (lang !== 'en' && lang !== 'kr' && lang !== 'ko') {
+    try { lang = localStorage.getItem('altr_lang') || ''; } catch (e) {}
+  }
+  if (lang !== 'en' && lang !== 'kr' && lang !== 'ko') {
+    const nav = (navigator.language || 'en').toLowerCase();
+    lang = nav.startsWith('ko') ? 'kr' : 'en';
+  }
+  if (lang === 'ko') lang = 'kr';
+  setLang(lang);
+
   const wantSide = URL_PARAMS.side;
   if (wantSide === 'venue' || wantSide === 'v') setSide('v');
   else renderProgress('b', 0);
