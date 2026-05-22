@@ -250,15 +250,25 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="sub" data-kr="altr 이 가장 먼저 해결해드릴 부분입니다.">This is what altr solves first for you.</div>
   <div class="fomo"><span class="dot"></span><span data-kr="대기리스트의 대다수 브랜드가 같은 답을 했어요 — 혼자가 아닙니다.">Most brands on our waitlist said exactly this — you're not alone.</span></div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="맞는 venue/이벤트 찾기">Finding the right venue or event</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="현지 실행 — 누가 팝업 운영하나">Local execution — who runs the pop-up?</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="맞는 스테이지 찾기 (어디로 가야 할지 모름)">Finding the right stage (I don't know where to go)</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="현지 실행 (어디로 갈지는 알지만, 혼자 운영 불가)">Local execution (I know where, but can't run it alone)</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="국경 간 결제 및 계약">Cross-border payments and contracts</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="내부 예산 승인을 위한 ROI 증명">Proving ROI to get internal budget approved</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="내부 이해관계자에게 ROI 증명">Proving ROI to internal stakeholders</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="위 전부 해당">All of the above</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('b',3)" data-kr="이전">Back</button><button class="btn-next" id="b4-next" type="button" onclick="next('b',5)" disabled data-kr="다음">Next</button></div>
 </div>
 
 <div class="screen" id="b5">
+  <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
+  <div class="q" data-kr="너의 골든 매치를 알려줘">Name your dream stage</div>
+  <div class="sub" data-kr="너의 타겟 마켓에서 어디든 단 하나 활성화할 수 있다면, 어디?">If you could activate at any event or venue in your target market, which one?</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="이게 너의 골든 매치. 그 venue 가 altr 에 합류하면 너가 매칭 대기열 첫 번째.">This is your Golden Match. When they join altr, you're first in their matching queue.</span></div>
+  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="e.g. Ultra Korea, Wanderlust Bali, Dubai Design Week…" data-kr-placeholder="예: 울트라 코리아, 원더러스트 발리, 두바이 디자인 위크…">
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b5-next" type="button" onclick="state.answers['b5']=document.getElementById('b-golden').value.trim();next('b',6)" data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b6">
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
   <div class="q" data-kr="마지막 단계 — 연락처 알려주세요">Last step — how do we reach you?</div>
   <div class="sub" data-kr="런칭 후 48시간 내 첫 스테이지 매칭 발송.">We'll send your first stage matches within 48 hours of launch.</div>
@@ -266,10 +276,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name" data-kr-placeholder="이름 + 직책">
   <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email" data-kr-placeholder="업무 이메일">
   <div class="errmsg" id="b-err" hidden></div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')" data-kr="내 스테이지 매칭 받기 →">Get my stage matches →</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',5)" data-kr="이전">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')" data-kr="내 스테이지 매칭 받기 →">Get my stage matches →</button></div>
 </div>
 
-<div class="screen" id="b6">
+<div class="screen" id="b7">
   <span class="pill pill-teal" data-kr="대기리스트 등록 완료">You're on the list</span>
   <div class="q" data-kr="당신을 위한 매칭">Here's what we matched for you</div>
   <div class="sub" data-kr="지금 K-콘텐츠 브랜드를 적극 찾고 있는 스테이지. 런칭 시 구체적 매칭 발송.">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
@@ -386,9 +396,9 @@ const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.leng
 const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 const state = { side: 'b', answers: {}, lang: 'en' };
-const STEPS = { b: 6, v: 5 };
-const FINAL_FORM = { b: 5, v: 4 };
-const SUCCESS = { b: 6, v: 5 };
+const STEPS = { b: 7, v: 5 };
+const FINAL_FORM = { b: 6, v: 4 };
+const SUCCESS = { b: 7, v: 5 };
 
 const URL_PARAMS = (() => {
   const p = new URLSearchParams(location.search), o = {};
