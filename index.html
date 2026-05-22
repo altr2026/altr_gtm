@@ -145,6 +145,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .refer-btn:hover{border-color:var(--line-strong);background:rgba(255,255,255,.04)}
 .refer-btn.copied{background:rgba(65,184,136,.08);border-color:rgba(65,184,136,.3);color:var(--mint-bright)}
 
+.b5-recap{font-size:12px;color:var(--text-2);margin-bottom:14px;padding:10px 12px;background:rgba(255,255,255,.025);border-radius:8px;border:1px solid var(--line);line-height:1.5}
+.b5-recap b{color:var(--text);font-weight:500}
+.b5-recap:empty{display:none}
+.b5-or{font-size:12px;color:var(--text-2);margin:1.25rem 0 .5rem;letter-spacing:.2px}
+#b5-curated:empty{display:none}
+
 @media (max-width: 480px){
   .card{padding:1.5rem;border-radius:14px}
   .q{font-size:20px}
@@ -262,11 +268,14 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 <div class="screen" id="b5">
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
-  <div class="q" data-kr="너의 골든 매치를 알려줘">Name your dream stage</div>
-  <div class="sub" data-kr="너의 타겟 마켓에서 어디든 단 하나 활성화할 수 있다면, 어디?">If you could activate at any Live IP in your target market, which one?</div>
+  <div class="q" data-kr="골든 매치: 너의 드림 스테이지를 알려줘">Golden Match: Name your dream stage</div>
+  <div class="sub" data-kr="이미 마음에 둔 후보가 있으면 선택, 없으면 직접 적거나 매칭 받기.">If you've got a specific Live IP in mind — pick it. Otherwise type your own or let us match.</div>
   <div class="fomo"><span class="dot"></span><span data-kr="이게 너의 골든 매치. 그 Live IP 가 altr 에 합류하면 너가 매칭 대기열 첫 번째.">This is your Golden Match. When they join altr, you're first in their matching queue.</span></div>
-  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="e.g. Ultra Korea, Wanderlust Bali, Dubai Design Week…" data-kr-placeholder="예: 울트라 코리아, 원더러스트 발리, 두바이 디자인 위크…">
-  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b5-next" type="button" onclick="state.answers['b5']=document.getElementById('b-golden').value.trim();next('b',6)" data-kr="다음">Next</button></div>
+  <div id="b5-recap" class="b5-recap"></div>
+  <div class="opts" id="b5-curated"></div>
+  <div class="b5-or" data-kr="또는 직접 입력 — 이벤트/Live IP 이름:">Or type any event/Live IP name:</div>
+  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="Type the name…" data-kr-placeholder="이름 입력…" oninput="onGoldenInput()">
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b5-next" type="button" onclick="advanceGolden()" data-kr-skip="건너뛰기 — 베스트 핏 매칭 →" data-kr-next="다음 →">Skip — match me with the best fit →</button></div>
 </div>
 
 <div class="screen" id="b6">
@@ -317,10 +326,11 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="sub" data-kr="K-콘텐츠 브랜드들은 마켓 우선순위가 명확합니다 — 너의 지역을 보는 브랜드를 알려드립니다.">K-content brands have specific market priorities — let's see who's looking at your region.</div>
   <div class="fomo"><span class="dot"></span><span data-kr="일본과 UAE 가 대기리스트 K-콘텐츠 브랜드가 가장 많이 요청하는 마켓입니다.">Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
   <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="일본">Japan</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="동남아">Southeast Asia</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="유럽">Europe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="미국">US</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="기타 / 복수 마켓">Other / multiple markets</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)" data-kr="이전">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled data-kr="다음">Next</button></div>
@@ -331,11 +341,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="q" data-kr="어떤 브랜드 파트너를 찾고 있나요?">What kind of brand partner are you looking for?</div>
   <div class="sub" data-kr="오디언스와 프로그래밍 니즈에 맞는 대기리스트 브랜드를 우선 매칭해드립니다.">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-푸드 또는 음료 팝업">K-food or beverage pop-up</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-뷰티 또는 웰니스 액티베이션">K-beauty or wellness activation</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-패션 또는 라이프스타일 브랜드">K-fashion or lifestyle brand</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="라이브 액티베이션 예산 보유한 스폰서">Sponsor with live activation budget</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="오픈 — 전체 K-콘텐츠 카테고리 보고 싶음">Open — show us the full K-content range</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-푸드 & 음료">K-food &amp; beverage</div><div class="opt-sub" data-kr="팝업, 샘플링, 시식">pop-up, sampling, tasting</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-뷰티 & 웰니스">K-beauty &amp; wellness</div><div class="opt-sub" data-kr="데모 부스, 체험 존">demo booth, experience zone</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-패션 & 라이프스타일">K-fashion &amp; lifestyle</div><div class="opt-sub" data-kr="팝업 스토어, 쇼룸">pop-up store, showroom</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-엔터테인먼트 & IP">K-entertainment &amp; IP</div><div class="opt-sub" data-kr="팬 액티베이션, 이머시브 경험">fan activation, immersive experience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="복수 카테고리">Multiple categories</div><div class="opt-sub" data-kr="가능한 전체 보여줘">show us everything available</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="전통 스폰서">Traditional sponsor</div><div class="opt-sub" data-kr="액티베이션 예산 보유한 캐피털 스폰서">capital sponsor with activation budget</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)" data-kr="이전">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled data-kr="다음">Next</button></div>
 </div>
@@ -448,6 +459,9 @@ function setLang(lang) {
     el.placeholder = lang === 'kr' ? el.dataset.krPlaceholder : el.dataset.enPlaceholder;
   });
   try { localStorage.setItem('altr_lang', lang); } catch (e) {}
+  // If b5 is currently rendered, refresh curated text + button label
+  if (typeof renderGoldenMatches === 'function' && $('b5') && $('b5').classList.contains('on')) renderGoldenMatches();
+  else if (typeof updateGoldenButton === 'function') updateGoldenButton();
 }
 
 function setSide(s) {
@@ -492,12 +506,274 @@ function next(s, step) {
   if (step < SUCCESS[s]) renderProgress(s, step);
   else renderProgress(s, STEPS[s] - 1);
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (s === 'b' && step === 5) renderGoldenMatches();
 }
 
 function back(s, step) {
   $(s + (step + 1)).classList.remove('on');
   $(s + step).classList.add('on');
   renderProgress(s, step);
+  if (s === 'b' && step === 5) renderGoldenMatches();
+}
+
+// ---------- Golden Match curation (b5) ----------
+const GOLDEN_MATCHES = {
+  'UAE / Saudi Arabia / GCC': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "Gulfood (Dubai) — world's largest food expo", kr: "걸푸드 (두바이) — 세계 최대 식품 박람회" },
+      { en: "Saudi Food Show (Riyadh) — fast-growing F&B market", kr: "사우디 푸드쇼 (리야드) — 빠르게 성장하는 F&B 시장" },
+      { en: "SIAL Middle East (Abu Dhabi)", kr: "SIAL 미들이스트 (아부다비)" }
+    ],
+    'Beauty / skincare': [
+      { en: "Beautyworld Middle East (Dubai) — 70K audience, beauty/wellness", kr: "뷰티월드 미들이스트 (두바이) — 7만 오디언스" },
+      { en: "Professional Beauty GCC (Dubai) — expanding 2× in 2026", kr: "프로페셔널 뷰티 GCC (두바이) — 2026년 2배 확장" },
+      { en: "Sephora flagship activations (Dubai/Riyadh)", kr: "세포라 플래그십 액티베이션 (두바이/리야드)" }
+    ],
+    'Health & wellness': [
+      { en: "Arab Health (Dubai) — largest healthcare event", kr: "아랍 헬스 (두바이) — 최대 헬스케어 이벤트" },
+      { en: "Dubai Active Sports & Fitness Expo", kr: "두바이 액티브 스포츠 & 피트니스 엑스포" },
+      { en: "Aesthetic & Anti-Aging Middle East", kr: "에스테틱 & 안티에이징 미들이스트" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "Arab Fashion Week (Dubai)", kr: "아랍 패션위크 (두바이)" },
+      { en: "Dubai Design Week", kr: "두바이 디자인위크" },
+      { en: "Riyadh Fashion Week", kr: "리야드 패션위크" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "GITEX (Dubai) — 5K+ exhibitors", kr: "GITEX (두바이) — 5천+ 출품사" },
+      { en: "Saudi Esports & Gaming (Riyadh)", kr: "사우디 e스포츠 & 게이밍 (리야드)" },
+      { en: "MENA Comic Con (Dubai)", kr: "MENA 코믹콘 (두바이)" }
+    ]
+  },
+  'Japan': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "FOODEX Japan (Chiba) — Asia's largest food expo", kr: "FOODEX 재팬 (치바) — 아시아 최대 식품 박람회" },
+      { en: "Wine & Gourmet Japan (Tokyo)", kr: "와인 & 고메 재팬 (도쿄)" },
+      { en: "Cafe Show Japan (Tokyo)", kr: "카페쇼 재팬 (도쿄)" }
+    ],
+    'Beauty / skincare': [
+      { en: "COSME Tokyo — Japan's largest beauty expo", kr: "코스메 도쿄 — 일본 최대 뷰티 박람회" },
+      { en: "Beautyworld Japan (Tokyo)", kr: "뷰티월드 재팬 (도쿄)" },
+      { en: "Isetan Shinjuku — flagship beauty floor activations", kr: "이세탄 신주쿠 — 플래그십 뷰티 액티베이션" }
+    ],
+    'Health & wellness': [
+      { en: "Diet & Beauty Fair (Tokyo)", kr: "다이어트 & 뷰티 페어 (도쿄)" },
+      { en: "Wellness Tokyo", kr: "웰니스 도쿄" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "Rakuten Fashion Week Tokyo", kr: "라쿠텐 패션위크 도쿄" },
+      { en: "Isetan Shinjuku — flagship retail moments", kr: "이세탄 신주쿠 — 플래그십 리테일 모먼트" },
+      { en: "Roppongi Hills seasonal activations", kr: "롯폰기 힐스 시즌 액티베이션" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "Tokyo Game Show (Makuhari)", kr: "도쿄 게임쇼 (마쿠하리)" },
+      { en: "Comiket (Tokyo)", kr: "코미케 (도쿄)" },
+      { en: "Anime Japan (Tokyo)", kr: "애니메 재팬 (도쿄)" }
+    ]
+  },
+  'Southeast Asia (SG, TH, MY, ID)': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "FHA-Food & Beverage (Singapore)", kr: "FHA-식음료 (싱가포르)" },
+      { en: "THAIFEX-Anuga Asia (Bangkok)", kr: "THAIFEX-아누가 아시아 (방콕)" },
+      { en: "Salon du Chocolat (Singapore)", kr: "살롱 뒤 쇼콜라 (싱가포르)" }
+    ],
+    'Beauty / skincare': [
+      { en: "Beauty World KL (Kuala Lumpur)", kr: "뷰티월드 KL (쿠알라룸푸르)" },
+      { en: "Cosmobeauté Indonesia (Jakarta)", kr: "코스모뷰티 인도네시아 (자카르타)" },
+      { en: "In-Cosmetics Asia (Bangkok)", kr: "인코스메틱스 아시아 (방콕)" }
+    ],
+    'Health & wellness': [
+      { en: "Asia Health (Singapore)", kr: "아시아 헬스 (싱가포르)" },
+      { en: "Vitafoods Asia (Bangkok)", kr: "비타푸드 아시아 (방콕)" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "Singapore Fashion Week", kr: "싱가포르 패션위크" },
+      { en: "Kuala Lumpur Fashion Week (KLFW)", kr: "쿠알라룸푸르 패션위크 (KLFW)" },
+      { en: "Bangkok International Fashion Week", kr: "방콕 인터내셔널 패션위크" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "ComicCon Asia (Singapore)", kr: "코믹콘 아시아 (싱가포르)" },
+      { en: "GameStart Asia (Singapore)", kr: "게임스타트 아시아 (싱가포르)" }
+    ]
+  },
+  'Europe': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "SIAL Paris — Europe's largest F&B trade show", kr: "SIAL 파리 — 유럽 최대 F&B 트레이드쇼" },
+      { en: "Anuga (Cologne)", kr: "아누가 (쾰른)" },
+      { en: "London Coffee Festival", kr: "런던 커피 페스티벌" }
+    ],
+    'Beauty / skincare': [
+      { en: "Cosmoprof Bologna — global beauty marketplace", kr: "코스모프로프 볼로냐 — 글로벌 뷰티 마켓플레이스" },
+      { en: "Beauty Düsseldorf", kr: "뷰티 뒤셀도르프" },
+      { en: "In-Cosmetics Global", kr: "인코스메틱스 글로벌" }
+    ],
+    'Health & wellness': [
+      { en: "Vitafoods Europe (Geneva)", kr: "비타푸드 유럽 (제네바)" },
+      { en: "Olympia Beauty (London)", kr: "올림피아 뷰티 (런던)" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "Paris Fashion Week", kr: "파리 패션위크" },
+      { en: "London Fashion Week", kr: "런던 패션위크" },
+      { en: "Milan Fashion Week", kr: "밀라노 패션위크" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "Gamescom (Cologne) — world's largest games event", kr: "게임스컴 (쾰른) — 세계 최대 게임 이벤트" },
+      { en: "EGX (London)", kr: "EGX (런던)" },
+      { en: "Reeperbahn Festival (Hamburg)", kr: "리퍼반 페스티벌 (함부르크)" }
+    ]
+  },
+  'US': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "Summer Fancy Food Show (NYC)", kr: "서머 팬시 푸드쇼 (NYC)" },
+      { en: "Natural Products Expo West (Anaheim)", kr: "내추럴 프로덕츠 엑스포 웨스트 (애너하임)" },
+      { en: "Specialty Coffee Expo", kr: "스페셜티 커피 엑스포" }
+    ],
+    'Beauty / skincare': [
+      { en: "Cosmoprof North America (Las Vegas)", kr: "코스모프로프 노스아메리카 (라스베가스)" },
+      { en: "Sephoria — Sephora's beauty experience", kr: "세포리아 — 세포라의 뷰티 경험" },
+      { en: "Beautycon (LA)", kr: "뷰티콘 (LA)" }
+    ],
+    'Health & wellness': [
+      { en: "Natural Products Expo West (Anaheim)", kr: "내추럴 프로덕츠 엑스포 웨스트 (애너하임)" },
+      { en: "Wellness World Expo (NYC)", kr: "웰니스 월드 엑스포 (NYC)" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "New York Fashion Week (NYFW)", kr: "뉴욕 패션위크 (NYFW)" },
+      { en: "ComplexCon (LA)", kr: "컴플렉스콘 (LA)" },
+      { en: "Coachella-adjacent activations (LA)", kr: "코첼라 인접 액티베이션 (LA)" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "SXSW (Austin)", kr: "SXSW (오스틴)" },
+      { en: "San Diego Comic-Con", kr: "샌디에이고 코믹콘" },
+      { en: "Summer Game Fest (LA)", kr: "서머 게임 페스트 (LA)" }
+    ]
+  },
+  'Open to recommendations': {
+    'F&B — restaurant, food product, beverage': [
+      { en: "Gulfood (Dubai)", kr: "걸푸드 (두바이)" },
+      { en: "FOODEX Japan", kr: "FOODEX 재팬" },
+      { en: "SIAL Paris", kr: "SIAL 파리" }
+    ],
+    'Beauty / skincare': [
+      { en: "Cosmoprof Bologna", kr: "코스모프로프 볼로냐" },
+      { en: "Beautyworld Middle East (Dubai)", kr: "뷰티월드 미들이스트 (두바이)" },
+      { en: "COSME Tokyo", kr: "코스메 도쿄" }
+    ],
+    'Health & wellness': [
+      { en: "Vitafoods Europe", kr: "비타푸드 유럽" },
+      { en: "Natural Products Expo West (US)", kr: "내추럴 프로덕츠 엑스포 웨스트 (미국)" }
+    ],
+    'Fashion / streetwear / lifestyle': [
+      { en: "Paris Fashion Week", kr: "파리 패션위크" },
+      { en: "Rakuten Fashion Week Tokyo", kr: "라쿠텐 패션위크 도쿄" }
+    ],
+    'Entertainment / media / gaming IP': [
+      { en: "Gamescom (Cologne)", kr: "게임스컴 (쾰른)" },
+      { en: "Tokyo Game Show", kr: "도쿄 게임쇼" },
+      { en: "SXSW (Austin)", kr: "SXSW (오스틴)" }
+    ]
+  }
+};
+
+const MARKET_SHORT = {
+  'UAE / Saudi Arabia / GCC': 'GCC',
+  'Japan': 'Japan',
+  'Southeast Asia (SG, TH, MY, ID)': 'SEA',
+  'Europe': 'Europe',
+  'US': 'US',
+  'Open to recommendations': 'open'
+};
+
+const VERTICAL_SHORT = {
+  'F&B — restaurant, food product, beverage': 'F&B',
+  'Beauty / skincare': 'Beauty',
+  'Health & wellness': 'Health & wellness',
+  'Fashion / streetwear / lifestyle': 'Fashion',
+  'Entertainment / media / gaming IP': 'Entertainment'
+};
+
+function renderGoldenMatches() {
+  const market = state.answers.b2 || '';
+  const vertical = state.answers.b1 || '';
+  const recap = $('b5-recap');
+  const container = $('b5-curated');
+  const input = $('b-golden');
+  if (!container || !recap) return;
+
+  // Recap line
+  if (market && vertical) {
+    const m = MARKET_SHORT[market] || market;
+    const v = VERTICAL_SHORT[vertical] || vertical;
+    recap.innerHTML = state.lang === 'kr'
+      ? `너의 마켓 <b>${m}</b> × 카테고리 <b>${v}</b> 기반 추천:`
+      : `Based on your target market <b>${m}</b> and vertical <b>${v}</b>:`;
+  } else {
+    recap.innerHTML = '';
+  }
+
+  // Rebuild curated list
+  container.innerHTML = '';
+  const matches = (GOLDEN_MATCHES[market] || {})[vertical] || [];
+  for (const m of matches) {
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'opt-btn';
+    btn.dataset.value = m.en;
+    btn.dataset.kr = m.kr;
+    btn.innerHTML = `<div class="opt-title">${state.lang === 'kr' ? m.kr : m.en}</div>`;
+    btn.onclick = () => pickGolden(btn);
+    container.appendChild(btn);
+  }
+
+  // Restore previous selection if any
+  const prev = state.answers.b5 || '';
+  if (prev && prev !== '_SKIP_') {
+    let matched = false;
+    container.querySelectorAll('.opt-btn').forEach(b => {
+      if (b.dataset.value === prev) { b.classList.add('sel'); matched = true; }
+    });
+    if (!matched && input) input.value = prev;
+  } else if (input) {
+    input.value = '';
+  }
+
+  updateGoldenButton();
+}
+
+function pickGolden(el) {
+  document.querySelectorAll('#b5-curated .opt-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  state.answers.b5 = el.dataset.value;
+  const input = $('b-golden');
+  if (input) input.value = '';
+  updateGoldenButton();
+}
+
+function onGoldenInput() {
+  const v = $('b-golden').value.trim();
+  document.querySelectorAll('#b5-curated .opt-btn.sel').forEach(b => b.classList.remove('sel'));
+  state.answers.b5 = v;
+  updateGoldenButton();
+}
+
+function updateGoldenButton() {
+  const btn = $('b5-next');
+  if (!btn) return;
+  const v = (state.answers.b5 || '').trim();
+  const hasValue = v && v !== '_SKIP_';
+  if (hasValue) {
+    btn.textContent = state.lang === 'kr' ? '다음 →' : 'Next →';
+  } else {
+    btn.textContent = state.lang === 'kr' ? '건너뛰기 — 베스트 핏 매칭 →' : 'Skip — match me with the best fit →';
+  }
+}
+
+function advanceGolden() {
+  const input = $('b-golden');
+  const v = input ? input.value.trim() : '';
+  if (v) state.answers.b5 = v;
+  if (!state.answers.b5) state.answers.b5 = '_SKIP_';
+  next('b', 6);
 }
 
 async function submit(s) {
