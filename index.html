@@ -46,7 +46,8 @@ html,body{background:var(--bg)}
 body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;font-feature-settings:'cv11','ss01'}
 
 .topbar{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:24px 32px;position:relative;z-index:2}
-.topbar-left{display:flex;align-items:center;gap:14px;min-width:0}
+.topbar-left{display:flex;align-items:center;gap:14px;min-width:0;text-decoration:none;color:inherit;cursor:pointer;transition:opacity .15s}
+.topbar-left:hover{opacity:.78}
 .topbar-logo{height:22px;width:auto;display:block;flex-shrink:0}
 .topbar-tag{font-size:12px;color:var(--text-2);letter-spacing:.2px;padding-top:1px}
 .lang-toggle{display:flex;gap:0;border:1px solid var(--line);border-radius:8px;overflow:hidden;background:rgba(255,255,255,.02);flex-shrink:0}
@@ -161,10 +162,10 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <body>
 
 <header class="topbar">
-  <div class="topbar-left">
+  <a class="topbar-left" href="./" onclick="event.preventDefault(); goHome();" aria-label="Back to home">
     <img src="altr-logo-white.png" alt="altr" class="topbar-logo">
     <div class="topbar-tag">find your stage · be the stage</div>
-  </div>
+  </a>
   <div class="lang-toggle" role="group" aria-label="language">
     <button class="lang-btn on" type="button" data-lang="en" onclick="setLang('en')">EN</button>
     <button class="lang-btn" type="button" data-lang="kr" onclick="setLang('kr')">KR</button>
@@ -174,14 +175,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <div class="page">
 
 <aside class="hero">
+  <div class="hero-eyebrow"><span class="pdot"></span><span data-kr="파운딩 코호트 · 런칭 시 마감">Founding cohort · sealed at launch</span></div>
   <h1 class="hero-h1">
     <span class="ln1">Find your stage.</span>
     <span class="ln2">Be the stage.</span>
   </h1>
-  <p class="hero-lede" data-kr="altr 은 K-콘텐츠 브랜드와 글로벌 Live IP 를 카탈로그가 아닌 매칭으로 연결합니다.">altr matches K-content brands with global Live IP &mdash; by mandate, not catalogue.</p>
+  <p class="hero-lede" data-kr="altr 은 K-콘텐츠 브랜드와 글로벌 Live IP 를 카탈로그가 아닌 매칭으로 연결해드립니다.">altr matches K-content brands with global Live IP &mdash; by mandate, not catalogue.</p>
   <div class="hero-pairs">
-    <div class="hero-pair"><span class="pdot teal"></span><div><b data-kr="K-콘텐츠 브랜드">K-content brand</b> <span data-kr="· 너의 카테고리를 이미 찾는 Live IP 발견">&middot; find Live IP already asking for your category</span></div></div>
-    <div class="hero-pair"><span class="pdot purple"></span><div><b data-kr="글로벌 Live IP">Global Live IP</b> <span data-kr="· 너의 마켓에서 활동 준비된 브랜드 발견">&middot; discover brands ready to activate in your market</span></div></div>
+    <div class="hero-pair"><span class="pdot teal"></span><div><b data-kr="K-콘텐츠 브랜드">K-content brand</b> <span data-kr="· 당신의 카테고리를 이미 찾는 Live IP 발견">&middot; find Live IP already asking for your category</span></div></div>
+    <div class="hero-pair"><span class="pdot purple"></span><div><b data-kr="글로벌 Live IP">Global Live IP</b> <span data-kr="· 당신의 마켓에서 활동 준비된 브랜드 발견">&middot; discover brands ready to activate in your market</span></div></div>
   </div>
 </aside>
 
@@ -199,7 +201,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
   <div class="q" data-kr="지금 브랜드는 어느 단계인가요?">Where is your brand right now?</div>
   <div class="sub" data-kr="당신의 카테고리를 찾고 있는 스테이지와 매칭해드립니다.">We'll match you with stages already looking for exactly what you do.</div>
-  <div class="fomo"><span class="dot"></span><span data-kr="47개 K-콘텐츠 브랜드가 대기 중. 12개는 매칭 진행 중.">47 K-content brands are on the waitlist. 12 have active stage matches pending.</span></div>
+  <div class="fomo"><span class="dot"></span><span data-kr="100 파운딩 K-브랜드 중 47석 채워짐 · 런칭 시 마감.">47/100 founding K-brand seats taken · closes at launch.</span></div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="한국 내 활동, 글로벌 진출 준비">Korea-only, ready to go global</div><div class="opt-sub" data-kr="브랜드는 있고, 스테이지가 필요">We have the brand, we need the stage</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="이미 1–2개 마켓 진출, 확장 원함">Already in 1–2 markets, want to expand</div><div class="opt-sub" data-kr="약간의 해외 진출 경험 있음">We have some overseas presence</div></button>
@@ -211,7 +213,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <div class="screen" id="b1">
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
   <div class="q" data-kr="브랜드의 비즈니스 영역은?">What does your brand do?</div>
-  <div class="sub" data-kr="이미 너를 기다리는 Live IP 를 알려줍니다.">This tells us which Live IP is already waiting for you.</div>
+  <div class="sub" data-kr="이미 당신을 기다리는 Live IP 를 알려줍니다.">This tells us which Live IP is already waiting for you.</div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="F&B — 레스토랑, 식품, 음료">F&B — restaurant, food product, beverage</div><div class="opt-sub" data-kr="예: 타이거김밥, 농심, 카카오프렌즈카페">e.g. Tiger Gimbap, Nongshim, Kakao Friends Cafe</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="뷰티 / 스킨케어">Beauty / skincare</div><div class="opt-sub" data-kr="예: 이니스프리, 메디힐, 닥터자르트">e.g. Innisfree, Mediheal, Dr.Jart</div></button>
@@ -246,7 +248,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="부스 / 샘플링">Booth / sampling</div><div class="opt-sub" data-kr="Fee 모델 · 가벼운 풋프린트 — 샘플링, 데모, 시식만">Fee model · light footprint — sampling, demos, tastings only</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="팝업 파트너십 (RS)">Pop-up partnership (RS)</div><div class="opt-sub" data-kr="RS 모델 · Live IP 내 브랜드 큐레이션 팝업. 선불 없음, 판매에 따른 수익 배분.">RS model · brand-curated pop-up inside Live IP. No upfront, revenue share on sales.</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="브랜디드 존">Branded zone</div><div class="opt-sub" data-kr="Fee 모델 · 풀 브랜드 컨트롤, 시즌 또는 연간 운영">Fee model · full brand control, season or annual presence</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="모두 오픈">Open to all</div><div class="opt-sub" data-kr="K-콘텐츠 브랜드에 맞는 걸 보여줘">Show me what fits K-content brand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="모두 오픈">Open to all</div><div class="opt-sub" data-kr="K-콘텐츠 브랜드에 맞는 걸 보여주세요">Show me what fits K-content brand</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('b',2)" data-kr="이전">Back</button><button class="btn-next" id="b3-next" type="button" onclick="next('b',4)" disabled data-kr="다음">Next</button></div>
 </div>
@@ -268,13 +270,13 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 <div class="screen" id="b5">
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
-  <div class="q" data-kr="골든 매치: 너의 드림 스테이지를 알려줘">Golden Match: Name your dream stage</div>
+  <div class="q" data-kr="골든 매치: 당신의 드림 스테이지를 알려주세요">Golden Match: Name your dream stage</div>
   <div class="sub" data-kr="이미 마음에 둔 후보가 있으면 선택, 없으면 직접 적거나 매칭 받기.">If you've got a specific Live IP in mind — pick it. Otherwise type your own or let us match.</div>
-  <div class="fomo"><span class="dot"></span><span data-kr="이게 너의 골든 매치. 그 Live IP 가 altr 에 합류하면 너가 매칭 대기열 첫 번째.">This is your Golden Match. When they join altr, you're first in their matching queue.</span></div>
+  <div class="fomo"><span class="dot"></span><span data-kr="이게 당신의 골든 매치. 그 Live IP 가 altr 에 합류하면 당신이 매칭 대기열 첫 번째.">This is your Golden Match. When they join altr, you're first in their matching queue.</span></div>
   <div id="b5-recap" class="b5-recap"></div>
   <div class="opts" id="b5-curated"></div>
   <div class="b5-or" data-kr="또는 직접 입력 — 이벤트/Live IP 이름:">Or type any event/Live IP name:</div>
-  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="Type the name…" data-kr-placeholder="이름 입력…" oninput="onGoldenInput()">
+  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="Type the name…" data-kr-placeholder="이름 입력해주세요…" oninput="onGoldenInput()">
   <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b5-next" type="button" onclick="advanceGolden()" data-kr-skip="건너뛰기 — 베스트 핏 매칭 →" data-kr-next="다음 →">Skip — match me with the best fit →</button></div>
 </div>
 
@@ -295,7 +297,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="sub" data-kr="지금 K-콘텐츠 브랜드를 적극 찾고 있는 스테이지. 런칭 시 구체적 매칭 발송.">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
   <div class="fomo">
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span data-kr="K-콘텐츠 브랜드 대기리스트 #48번. 첫 20개 매칭은 6주 후 오픈.">You're #48 on the K-content brand waitlist. First 20 matches open in 6 weeks.</span>
+    <span data-kr="파운딩 K-브랜드 #48 of 100. 첫 웨이브는 런칭 시 마감.">Founding K-brand #48 of 100. First wave sealed at launch.</span>
   </div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="라이프스타일 리조트 · 알프스 / 스키">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780" data-kr="유럽 · 3개 Live IP 가 K-F&B 요청">Europe · 3 Live IP requesting K-F&amp;B</div></div><span class="match-tag" data-kr="높은 적합도">Strong fit</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="럭셔리 호텔 · 팝업 슬롯">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780" data-kr="두바이 · 2개 프로퍼티 Q3 오픈">Dubai · 2 properties open Q3</div></div><span class="match-tag" data-kr="높은 수요">High demand</span></div>
@@ -308,8 +310,8 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <div class="screen" id="v0">
   <span class="pill pill-purple" data-kr="글로벌 Live IP">Global Live IP</span>
   <div class="q" data-kr="오디언스를 모이게 하는 것은 무엇인가요?">What brings your audience together?</div>
-  <div class="sub" data-kr="이미 너의 Live IP 타입을 찾는 K-콘텐츠 브랜드와 매칭해드립니다.">We'll match you with K-content brands already looking for your type of Live IP.</div>
-  <div class="fomo"><span class="dot"></span><span data-kr="대기리스트의 31개 K-콘텐츠 브랜드가 너 같은 스테이지를 적극 찾고 있습니다.">31 K-content brands on our waitlist are actively looking for a stage like yours.</span></div>
+  <div class="sub" data-kr="이미 당신의 Live IP 타입을 찾는 K-콘텐츠 브랜드와 매칭해드립니다.">We'll match you with K-content brands already looking for your type of Live IP.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="마켓당 50 파운딩 Live IP 자리 중 31석 채워짐 · 당신 지역의 다른 Live IP 보다 first-look.">31/50 founding Live IP seats per market · first-look before competing Live IP in your region.</span></div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="Hospitality IP · 리조트 · 호텔 · 클럽">Hospitality IP · resort · hotel · club</div><div class="opt-sub" data-kr="공간 자체가 경험. 365일 캡티브 오디언스.">Your space is the experience. 365-day captive audience.</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title" data-kr="Festival & cultural IP · 음악 · 아트 · 문화">Festival &amp; cultural IP · music · art · culture</div><div class="opt-sub" data-kr="연 1회 또는 정기 라이브 이벤트, 자체 오디언스 보유.">Annual or recurring live event with owned audience.</div></button>
@@ -323,7 +325,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <div class="screen" id="v1">
   <span class="pill pill-purple" data-kr="글로벌 Live IP">Global Live IP</span>
   <div class="q" data-kr="어디에 위치해 있나요?">Where are you located?</div>
-  <div class="sub" data-kr="K-콘텐츠 브랜드들은 마켓 우선순위가 명확합니다 — 너의 지역을 보는 브랜드를 알려드립니다.">K-content brands have specific market priorities — let's see who's looking at your region.</div>
+  <div class="sub" data-kr="K-콘텐츠 브랜드들은 마켓 우선순위가 명확합니다 — 당신의 지역을 보는 브랜드를 알려드립니다.">K-content brands have specific market priorities — let's see who's looking at your region.</div>
   <div class="fomo"><span class="dot"></span><span data-kr="일본과 UAE 가 대기리스트 K-콘텐츠 브랜드가 가장 많이 요청하는 마켓입니다.">Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div></button>
@@ -345,7 +347,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-뷰티 & 웰니스">K-beauty &amp; wellness</div><div class="opt-sub" data-kr="데모 부스, 체험 존">demo booth, experience zone</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-패션 & 라이프스타일">K-fashion &amp; lifestyle</div><div class="opt-sub" data-kr="팝업 스토어, 쇼룸">pop-up store, showroom</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="K-엔터테인먼트 & IP">K-entertainment &amp; IP</div><div class="opt-sub" data-kr="팬 액티베이션, 이머시브 경험">fan activation, immersive experience</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="복수 카테고리">Multiple categories</div><div class="opt-sub" data-kr="가능한 전체 보여줘">show us everything available</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="복수 카테고리">Multiple categories</div><div class="opt-sub" data-kr="가능한 전체 보여주세요">show us everything available</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title" data-kr="전통 스폰서">Traditional sponsor</div><div class="opt-sub" data-kr="액티베이션 예산 보유한 캐피털 스폰서">capital sponsor with activation budget</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)" data-kr="이전">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled data-kr="다음">Next</button></div>
@@ -377,16 +379,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 <div class="screen" id="v5">
   <span class="pill pill-purple" data-kr="대기리스트 등록 완료">You're on the list</span>
-  <div class="q" data-kr="이미 너의 스테이지를 기다리는 브랜드">Brands already waiting for your stage</div>
-  <div class="sub" data-kr="대기리스트의 이 K-콘텐츠 카테고리 브랜드들이 너의 마켓을 찾고 있습니다.">These K-content categories have brands on our waitlist looking for your market.</div>
+  <div class="q" data-kr="이미 당신의 스테이지를 기다리는 브랜드">Brands already waiting for your stage</div>
+  <div class="sub" data-kr="대기리스트의 이 K-콘텐츠 카테고리 브랜드들이 당신의 마켓을 찾고 있습니다.">These K-content categories have brands on our waitlist looking for your market.</div>
   <div class="fomo">
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span data-kr="너의 Live IP 가 대기리스트 31개 K-콘텐츠 브랜드에게 노출됨.">Your Live IP is now visible to 31 K-content brands on the waitlist.</span>
+    <span data-kr="파운딩 Live IP 확정. 31개 K-브랜드에 first-look · 당신 지역의 다른 Live IP 보다 앞서.">Founding Live IP confirmed. First-look on 31 K-brands before competing Live IP in your region.</span>
   </div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-F&B 브랜드 · 런칭 준비 완료">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 첫 마켓 진출">Budget $10–50K · first market entry</div></div><span class="match-tag" data-kr="3개 브랜드">3 brands</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-뷰티 브랜드 · 액티베이션 준비">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 체험 중심">Budget $10–50K · experience-led</div></div><span class="match-tag" data-kr="2개 브랜드">2 brands</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="대형 스폰서 · 라이브 액티베이션">Large sponsor · live activation</div><div style="font-size:12px;color:#888780" data-kr="예산 $200K+ · 앵커 파트너">Budget $200K+ · anchor partner</div></div><span class="match-tag" data-kr="소개 가능">Intro available</span></div>
-  <div style="font-size:12px;color:#888780;margin-top:1rem" data-kr="altr 에 등록되어야 할 다른 Live IP 를 알고 계신가요? 추천하시면 너의 첫 매칭을 우선 처리합니다.">Know another Live IP that should be on altr? Refer them and we'll prioritise your first match.</div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem" data-kr="altr 에 등록되어야 할 다른 Live IP 를 알고 계신가요? 추천하시면 당신의 첫 매칭을 우선 처리합니다.">Know another Live IP that should be on altr? Refer them and we'll prioritise your first match.</div>
   <button class="refer-btn" type="button" onclick="copyShare(this)" data-kr="공유 링크 복사">Copy share link</button>
 </div>
 
@@ -462,6 +464,25 @@ function setLang(lang) {
   // If b5 is currently rendered, refresh curated text + button label
   if (typeof renderGoldenMatches === 'function' && $('b5') && $('b5').classList.contains('on')) renderGoldenMatches();
   else if (typeof updateGoldenButton === 'function') updateGoldenButton();
+}
+
+function goHome() {
+  // Reset to K-content brand side, screen 0, all state cleared
+  state.side = 'b';
+  state.answers = {};
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('on', b.dataset.side === 'b'));
+  document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
+  $('b0').classList.add('on');
+  document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+  document.querySelectorAll('[id$="-next"]').forEach(b => {
+    if (b.id !== 'b-submit' && b.id !== 'v-submit' && b.id !== 'b5-next') b.setAttribute('disabled', '');
+  });
+  document.querySelectorAll('.inp').forEach(i => i.value = '');
+  // Clear b5 curated list and recap
+  const b5c = $('b5-curated'); if (b5c) b5c.innerHTML = '';
+  const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
+  renderProgress('b', 0);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function setSide(s) {
@@ -705,7 +726,7 @@ function renderGoldenMatches() {
     const m = MARKET_SHORT[market] || market;
     const v = VERTICAL_SHORT[vertical] || vertical;
     recap.innerHTML = state.lang === 'kr'
-      ? `너의 마켓 <b>${m}</b> × 카테고리 <b>${v}</b> 기반 추천:`
+      ? `당신의 마켓 <b>${m}</b> × 카테고리 <b>${v}</b> 기반 추천:`
       : `Based on your target market <b>${m}</b> and vertical <b>${v}</b>:`;
   } else {
     recap.innerHTML = '';
