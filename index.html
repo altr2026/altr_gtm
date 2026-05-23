@@ -142,6 +142,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .screen{display:none}
 .screen.on{display:block}
 
+.perks{border:1px solid rgba(65,184,136,.22);background:rgba(65,184,136,.05);border-radius:12px;padding:14px 16px;margin-bottom:14px}
+.perks.lavender{border-color:rgba(168,156,219,.22);background:rgba(168,156,219,.05)}
+.perks-title{font-size:10px;color:var(--mint-bright);font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-bottom:10px}
+.perks.lavender .perks-title{color:var(--lavender)}
+.perks ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:7px}
+.perks li{font-size:13px;color:var(--text);line-height:1.45;padding-left:20px;position:relative}
+.perks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--mint-bright);font-weight:700;font-size:13px}
+.perks.lavender li::before{color:var(--lavender)}
+
 .refer-btn{margin-top:1rem;font-size:12px;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-family:inherit;transition:all .15s;font-weight:500}
 .refer-btn:hover{border-color:var(--line-strong);background:rgba(255,255,255,.04)}
 .refer-btn.copied{background:rgba(65,184,136,.08);border-color:rgba(65,184,136,.3);color:var(--mint-bright)}
@@ -299,6 +308,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span data-kr="파운딩 K-브랜드 #48 of 100. 첫 웨이브는 런칭 시 마감.">Founding K-brand #48 of 100. First wave sealed at launch.</span>
   </div>
+  <div class="perks">
+    <div class="perks-title" data-kr="파운딩 100 혜택">Founding 100 receive</div>
+    <ul>
+      <li data-kr="우선 매칭 — Live IP 확정 즉시 큐 첫 번째">Priority matching — first in queue as Live IP confirm</li>
+      <li data-kr="첫 6개월 플랫폼 수수료 면제">No platform fees for the first 6 months</li>
+      <li data-kr="altr 프로필에 영구 파운딩 배지">Permanent founding badge on your altr profile</li>
+      <li data-kr="파운딩 Live IP 파트너 직접 소개">Direct intros to founding Live IP partners</li>
+    </ul>
+  </div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="라이프스타일 리조트 · 알프스 / 스키">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780" data-kr="유럽 · 3개 Live IP 가 K-F&B 요청">Europe · 3 Live IP requesting K-F&amp;B</div></div><span class="match-tag" data-kr="높은 적합도">Strong fit</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="럭셔리 호텔 · 팝업 슬롯">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780" data-kr="두바이 · 2개 프로퍼티 Q3 오픈">Dubai · 2 properties open Q3</div></div><span class="match-tag" data-kr="높은 수요">High demand</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="문화 페스티벌 · 푸드 빌리지">Cultural festival · food village</div><div style="font-size:12px;color:#888780" data-kr="일본 · 1슬롯 남음">Japan · 1 slot remaining</div></div><span class="match-tag" data-kr="1슬롯 남음">1 slot left</span></div>
@@ -384,6 +402,15 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
   <div class="fomo">
     <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
     <span data-kr="파운딩 Live IP 확정. 31개 K-브랜드에 first-look · 당신 지역의 다른 Live IP 보다 앞서.">Founding Live IP confirmed. First-look on 31 K-brands before competing Live IP in your region.</span>
+  </div>
+  <div class="perks lavender">
+    <div class="perks-title" data-kr="파운딩 Live IP 혜택">Founding Live IP receive</div>
+    <ul>
+      <li data-kr="First-look — 비파운딩 Live IP 보다 먼저 K-브랜드 요청 확인">First-look — see incoming K-brand requests before non-founding peers</li>
+      <li data-kr="첫 6개월 플랫폼 수수료 면제">No platform fees for the first 6 months</li>
+      <li data-kr="altr 프로필에 영구 파운딩 배지">Permanent founding badge on your altr profile</li>
+      <li data-kr="파운딩 K-브랜드 직접 소개">Direct intros to founding K-brands</li>
+    </ul>
   </div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-F&B 브랜드 · 런칭 준비 완료">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 첫 마켓 진출">Budget $10–50K · first market entry</div></div><span class="match-tag" data-kr="3개 브랜드">3 brands</span></div>
   <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="K-뷰티 브랜드 · 액티베이션 준비">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780" data-kr="예산 $10–50K · 체험 중심">Budget $10–50K · experience-led</div></div><span class="match-tag" data-kr="2개 브랜드">2 brands</span></div>
