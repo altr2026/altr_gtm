@@ -436,7 +436,7 @@ const SUPABASE_ANON_KEY = 'sb_publishable_CnnNRwyEkOvE321po-hzDQ_gJjIZu3O';
 const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.length > 30;
 const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
-const state = { side: 'b', answers: {}, lang: 'en' };
+const state = { side: 'b', answers: {}, lang: 'en', userLang: 'en' };
 const STEPS = { b: 7, v: 5 };
 const FINAL_FORM = { b: 6, v: 4 };
 const SUCCESS = { b: 7, v: 5 };
@@ -471,8 +471,10 @@ const i18n = {
 
 function t(key) { return (i18n[state.lang] || i18n.en)[key]; }
 
-function setLang(lang) {
+function setLang(lang, persist) {
+  if (persist === undefined) persist = true;
   if (lang !== 'en' && lang !== 'kr') lang = 'en';
+  if (persist) state.userLang = lang;
   state.lang = lang;
   document.documentElement.lang = lang === 'kr' ? 'ko' : 'en';
   // toggle button states
@@ -487,10 +489,22 @@ function setLang(lang) {
     if (!el.dataset.enPlaceholder) el.dataset.enPlaceholder = el.placeholder || '';
     el.placeholder = lang === 'kr' ? el.dataset.krPlaceholder : el.dataset.enPlaceholder;
   });
-  try { localStorage.setItem('altr_lang', lang); } catch (e) {}
+  if (persist) { try { localStorage.setItem('altr_lang', lang); } catch (e) {} }
   // If b5 is currently rendered, refresh curated text + button label
   if (typeof renderGoldenMatches === 'function' && $('b5') && $('b5').classList.contains('on')) renderGoldenMatches();
   else if (typeof updateGoldenButton === 'function') updateGoldenButton();
+}
+
+function applyLangForSide() {
+  // Hide language toggle and force English on venue side; restore on brand side.
+  const toggle = document.querySelector('.lang-toggle');
+  if (state.side === 'v') {
+    if (toggle) toggle.style.display = 'none';
+    if (state.lang !== 'en') setLang('en', false);
+  } else {
+    if (toggle) toggle.style.display = '';
+    if (state.lang !== state.userLang) setLang(state.userLang, false);
+  }
 }
 
 function goHome() {
@@ -527,6 +541,7 @@ function setSide(s) {
   const firstNext = $(s + '0-next');
   if (firstNext) firstNext.setAttribute('disabled', '');
   renderProgress(s, 0);
+  applyLangForSide();
 }
 
 function renderProgress(s, step) {
@@ -929,6 +944,7 @@ function copyShare(btn) {
   const wantSide = URL_PARAMS.side;
   if (wantSide === 'venue' || wantSide === 'v') setSide('v');
   else renderProgress('b', 0);
+  applyLangForSide();
 })();
 </script>
 </body>
