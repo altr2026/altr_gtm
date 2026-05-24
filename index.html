@@ -151,6 +151,30 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .perks li::before{content:"✓";position:absolute;left:0;top:0;color:var(--mint-bright);font-weight:700;font-size:13px}
 .perks.lavender li::before{color:var(--lavender)}
 
+.intro-h1{font-family:inherit;font-size:40px;line-height:1.05;letter-spacing:-1.2px;margin-bottom:20px;color:var(--text);font-weight:600;text-wrap:balance}
+.intro-h1 .ln1,.intro-h1 .ln2{display:block}
+.intro-h1 .ln2{color:var(--mint)}
+.intro-lede{font-size:14px;color:var(--text-2);line-height:1.5;margin-bottom:24px}
+.intro-pairs{display:flex;flex-direction:column;gap:10px;padding-top:20px;border-top:1px solid var(--line);margin-bottom:28px}
+.intro-pair{font-size:12.5px;color:var(--text);display:flex;align-items:flex-start;gap:10px;line-height:1.45}
+.intro-pair .pdot{width:7px;height:7px;border-radius:2px;flex-shrink:0;margin-top:6px}
+.intro-pair .pdot.teal{background:var(--mint-bright)}
+.intro-pair .pdot.purple{background:var(--lavender)}
+.intro-pair b{font-weight:500;color:var(--text)}
+.intro-pair span{color:var(--text-2)}
+.intro-actions{display:flex;flex-direction:column;gap:8px}
+.intro-cta{padding:16px 18px;border-radius:12px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;text-align:left;transition:all .15s;border:1px solid}
+.intro-cta.teal{background:rgba(29,158,117,.12);border-color:rgba(65,184,136,.3);color:var(--mint-bright)}
+.intro-cta.teal:hover{background:rgba(29,158,117,.2);border-color:var(--mint)}
+.intro-cta.purple{background:rgba(168,156,219,.1);border-color:rgba(168,156,219,.3);color:var(--lavender)}
+.intro-cta.purple:hover{background:rgba(168,156,219,.18);border-color:var(--lavender)}
+body.is-hook .side-toggle,body.is-hook .progress{display:none}
+@media (min-width:1024px){
+  body.is-hook .hero{display:none}
+  body.is-hook .page{justify-content:center}
+  body.is-hook .card{flex:0 0 560px}
+}
+
 .refer-btn{margin-top:1rem;font-size:12px;padding:9px 14px;border-radius:8px;border:1px solid var(--line);background:transparent;color:var(--text);cursor:pointer;font-family:inherit;transition:all .15s;font-weight:500}
 .refer-btn:hover{border-color:var(--line-strong);background:rgba(255,255,255,.04)}
 .refer-btn.copied{background:rgba(65,184,136,.08);border-color:rgba(65,184,136,.3);color:var(--mint-bright)}
@@ -198,6 +222,25 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 
 <div class="card">
 
+<!-- HOOK / INTRO -->
+<div class="screen on" id="intro">
+  <div class="hero-eyebrow"><span class="pdot"></span><span data-kr="파운딩 코호트 · 런칭 시 마감">Founding cohort · sealed at launch</span></div>
+  <h1 class="intro-h1"><span class="ln1">Find your stage.</span><span class="ln2">Be the stage.</span></h1>
+  <p class="intro-lede" data-kr="altr 은 K-콘텐츠 브랜드와 글로벌 Live IP 를 카탈로그가 아닌 매칭으로 연결해드립니다.">altr matches K-content brands with global Live IP &mdash; by mandate, not catalogue.</p>
+  <div class="intro-pairs">
+    <div class="intro-pair"><span class="pdot teal"></span><div><b data-kr="K-콘텐츠 브랜드">K-content brand</b> <span data-kr="· 당신의 카테고리를 이미 찾는 Live IP 발견">&middot; find Live IP already asking for your category</span></div></div>
+    <div class="intro-pair"><span class="pdot purple"></span><div><b data-kr="글로벌 Live IP">Global Live IP</b> <span data-kr="· 당신의 마켓에서 활동 준비된 브랜드 발견">&middot; discover brands ready to activate in your market</span></div></div>
+  </div>
+  <div class="intro-actions">
+    <button class="intro-cta teal" type="button" onclick="startSide('b')">
+      <span class="intro-cta-title" data-kr="K-콘텐츠 브랜드로 시작 →">I'm a K-content brand →</span>
+    </button>
+    <button class="intro-cta purple" type="button" onclick="startSide('v')">
+      <span class="intro-cta-title" data-kr="글로벌 Live IP 로 시작 →">I'm a Global Live IP →</span>
+    </button>
+  </div>
+</div>
+
 <div class="side-toggle">
   <button class="side-btn on" data-side="b" type="button" onclick="setSide('b')" data-kr="K-콘텐츠 브랜드">K-content brand</button>
   <button class="side-btn" data-side="v" type="button" onclick="setSide('v')" data-kr="글로벌 Live IP">Global Live IP</button>
@@ -206,7 +249,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 <div class="progress" id="progress"></div>
 
 <!-- BRAND FLOW -->
-<div class="screen on" id="b0">
+<div class="screen" id="b0">
   <span class="pill pill-teal" data-kr="K-콘텐츠 브랜드">K-content brand</span>
   <div class="q" data-kr="지금 브랜드는 어느 단계인가요?">Where is your brand right now?</div>
   <div class="sub" data-kr="당신의 카테고리를 찾고 있는 스테이지와 매칭해드립니다.">We'll match you with stages already looking for exactly what you do.</div>
@@ -508,21 +551,35 @@ function applyLangForSide() {
 }
 
 function goHome() {
-  // Reset to K-content brand side, screen 0, all state cleared
+  // Reset to the hook/intro screen, side toggle + progress hidden
   state.side = 'b';
   state.answers = {};
+  document.body.classList.add('is-hook');
   document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('on', b.dataset.side === 'b'));
   document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
-  $('b0').classList.add('on');
+  $('intro').classList.add('on');
   document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
   document.querySelectorAll('[id$="-next"]').forEach(b => {
     if (b.id !== 'b-submit' && b.id !== 'v-submit' && b.id !== 'b5-next') b.setAttribute('disabled', '');
   });
   document.querySelectorAll('.inp').forEach(i => i.value = '');
-  // Clear b5 curated list and recap
   const b5c = $('b5-curated'); if (b5c) b5c.innerHTML = '';
   const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
-  renderProgress('b', 0);
+  applyLangForSide();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function startSide(s) {
+  // Leave the hook, enter the flow
+  document.body.classList.remove('is-hook');
+  state.side = s;
+  state.answers = {};
+  document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('on', b.dataset.side === s));
+  document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
+  $(s + '0').classList.add('on');
+  document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+  renderProgress(s, 0);
+  applyLangForSide();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -941,10 +998,18 @@ function copyShare(btn) {
   if (lang === 'ko') lang = 'kr';
   setLang(lang);
 
+  // Default: show the hook/intro. Deep links (?side=brand|venue) skip the hook.
   const wantSide = URL_PARAMS.side;
-  if (wantSide === 'venue' || wantSide === 'v') setSide('v');
-  else renderProgress('b', 0);
-  applyLangForSide();
+  if (wantSide === 'venue' || wantSide === 'v') {
+    document.body.classList.remove('is-hook');
+    startSide('v');
+  } else if (wantSide === 'brand' || wantSide === 'b') {
+    document.body.classList.remove('is-hook');
+    startSide('b');
+  } else {
+    document.body.classList.add('is-hook');
+    applyLangForSide();
+  }
 })();
 </script>
 </body>
