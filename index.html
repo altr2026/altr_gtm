@@ -600,9 +600,8 @@ function startSide(s, pushHist) {
 }
 
 window.addEventListener('popstate', function() {
-  // Browser back/forward — if we're in flow, return to hook (no second pop)
   if (!document.body.classList.contains('is-hook')) {
-    // Avoid pushing another entry from goHome — manually reset state
+    // In flow: browser back returns to hook
     state.side = 'b';
     state.answers = {};
     document.body.classList.add('is-hook');
@@ -614,6 +613,11 @@ window.addEventListener('popstate', function() {
     const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
     applyLangForSide();
     window.scrollTo({ top: 0 });
+    // Re-push so subsequent back-press also stays trapped on hook
+    try { history.pushState({hookAnchor: true}, '', location.pathname + location.search); } catch (e) {}
+  } else {
+    // Already on hook — re-trap so user stays on this page
+    try { history.pushState({hookAnchor: true}, '', location.pathname + location.search); } catch (e) {}
   }
 });
 
@@ -1044,6 +1048,9 @@ function copyShare(btn) {
     document.body.classList.add('is-hook');
     applyLangForSide();
   }
+  // Anchor entry so the first browser-back press from any state lands a popstate
+  // event we can handle (instead of leaving the site entirely).
+  try { history.pushState({hookAnchor: true}, '', location.pathname + location.search); } catch (e) {}
 })();
 </script>
 </body>
