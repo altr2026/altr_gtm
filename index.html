@@ -170,16 +170,16 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .intro-cta.purple:hover{background:rgba(168,156,219,.18);border-color:var(--lavender)}
 body.is-hook .side-toggle,body.is-hook .progress,body.is-hook .foot{display:none}
 body.is-hook .card{background:transparent;border:none;padding:0;max-width:none;box-shadow:none}
-body.is-hook .intro-h1{font-size:56px;letter-spacing:-2px}
-body.is-hook .intro-lede{font-size:18px;max-width:520px}
+body.is-hook .intro-h1{font-size:44px;letter-spacing:-1.6px}
+body.is-hook .intro-lede{font-size:15px;max-width:520px}
 body.is-hook .intro-pairs{max-width:560px}
 body.is-hook .intro-actions{max-width:520px;margin-top:8px}
 @media (min-width:1024px){
   body.is-hook .hero{display:none}
   body.is-hook .page{justify-content:flex-start;max-width:1280px;padding:48px 64px 80px;align-items:flex-start}
   body.is-hook .card{flex:1 1 auto}
-  body.is-hook .intro-h1{font-size:96px;letter-spacing:-3.5px;margin-bottom:32px}
-  body.is-hook .intro-lede{font-size:20px;max-width:640px;margin-bottom:40px}
+  body.is-hook .intro-h1{font-size:72px;letter-spacing:-2.8px;margin-bottom:28px}
+  body.is-hook .intro-lede{font-size:17px;max-width:580px;margin-bottom:36px}
   body.is-hook .intro-pairs{max-width:640px;padding-top:28px;margin-bottom:40px;gap:14px}
   body.is-hook .intro-pair{font-size:14px}
   body.is-hook .intro-actions{flex-direction:row;max-width:none;gap:12px}
@@ -581,7 +581,7 @@ function goHome() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function startSide(s) {
+function startSide(s, pushHist) {
   // Leave the hook, enter the flow
   document.body.classList.remove('is-hook');
   state.side = s;
@@ -593,7 +593,29 @@ function startSide(s) {
   renderProgress(s, 0);
   applyLangForSide();
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Push history entry so browser back returns to the hook
+  if (pushHist !== false) {
+    try { history.pushState({inFlow: true, side: s}, '', '?side=' + (s === 'b' ? 'brand' : 'venue')); } catch (e) {}
+  }
 }
+
+window.addEventListener('popstate', function() {
+  // Browser back/forward — if we're in flow, return to hook (no second pop)
+  if (!document.body.classList.contains('is-hook')) {
+    // Avoid pushing another entry from goHome — manually reset state
+    state.side = 'b';
+    state.answers = {};
+    document.body.classList.add('is-hook');
+    document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
+    $('intro').classList.add('on');
+    document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+    document.querySelectorAll('.inp').forEach(i => i.value = '');
+    const b5c = $('b5-curated'); if (b5c) b5c.innerHTML = '';
+    const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
+    applyLangForSide();
+    window.scrollTo({ top: 0 });
+  }
+});
 
 function setSide(s) {
   if (state.side === s) return;
@@ -1014,10 +1036,10 @@ function copyShare(btn) {
   const wantSide = URL_PARAMS.side;
   if (wantSide === 'venue' || wantSide === 'v') {
     document.body.classList.remove('is-hook');
-    startSide('v');
+    startSide('v', false);
   } else if (wantSide === 'brand' || wantSide === 'b') {
     document.body.classList.remove('is-hook');
-    startSide('b');
+    startSide('b', false);
   } else {
     document.body.classList.add('is-hook');
     applyLangForSide();
