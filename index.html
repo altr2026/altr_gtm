@@ -170,6 +170,9 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .intro-cta.purple:hover{background:rgba(168,156,219,.18);border-color:var(--lavender)}
 body.is-hook .side-toggle,body.is-hook .progress,body.is-hook .foot{display:none}
 body.is-hook .card{background:transparent;border:none;padding:0;max-width:none;box-shadow:none}
+/* Flow state: drop the left hero column duplication + strip card chrome */
+body:not(.is-hook) .hero{display:none!important}
+body:not(.is-hook) .card{background:transparent;border:none;padding:0;box-shadow:none}
 body.is-hook .intro-h1{font-size:44px;letter-spacing:-1.6px}
 body.is-hook .intro-lede{font-size:15px;max-width:520px}
 body.is-hook .intro-pairs{max-width:560px}
