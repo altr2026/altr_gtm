@@ -135,6 +135,17 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
 .match-left{font-size:13px;color:var(--text)}
 .match-tag{font-size:11px;padding:3px 10px;border-radius:20px;background:rgba(168,156,219,.08);color:var(--lavender);white-space:nowrap;flex-shrink:0;border:1px solid rgba(168,156,219,.18);font-weight:500}
 
+.sub-opts{margin-top:18px;padding-top:18px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
+.sub-opts[hidden]{display:none}
+.sub-opts .sub-q{font-size:14px;font-weight:500;color:var(--text);margin-bottom:4px}
+.sub-opts .sub-lede{font-size:12px;color:var(--text-2);margin-bottom:10px;line-height:1.5}
+.sub-opts .opt-btn{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.sub-opts .opt-content{flex:1;min-width:0}
+.fit-tag{font-size:11px;padding:3px 10px;border-radius:20px;white-space:nowrap;flex-shrink:0;border:1px solid;font-weight:500}
+.fit-tag.strong{color:var(--mint-bright);background:rgba(65,184,136,.08);border-color:rgba(65,184,136,.28)}
+.fit-tag.fit{color:var(--lavender);background:rgba(168,156,219,.08);border-color:rgba(168,156,219,.28)}
+.fit-tag.limited{color:#e0b84a;background:rgba(224,184,74,.08);border-color:rgba(224,184,74,.28)}
+
 .foot{margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:8px;font-size:11px;color:var(--text-3)}
 .foot a{color:var(--text-2);text-decoration:none;border-bottom:1px solid var(--line)}
 .foot a:hover{color:var(--text);border-color:var(--line-strong)}
@@ -288,6 +299,49 @@ body.is-hook .intro-actions{max-width:520px;margin-top:8px}
     <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="패션 / 스트릿웨어 / 라이프스타일">Fashion / streetwear / lifestyle</div><div class="opt-sub" data-kr="예: 아더에러, 무신사, 젠틀몬스터">e.g. Ader Error, Musinsa, Gentle Monster</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="엔터테인먼트 / 미디어 / 게이밍 IP">Entertainment / media / gaming IP</div><div class="opt-sub" data-kr="예: 웹툰, HYBE IP, e스포츠">e.g. Webtoon, HYBE IP, esports</div></button>
   </div>
+
+  <div class="sub-opts" id="b1-sub" hidden>
+    <div class="sub-q" data-kr="F&B 안에서도 — 어떤 타입인가요?">Within F&B — what kind?</div>
+    <div class="sub-lede" data-kr="라이브 스테이지가 지금 당신에게 실제로 맞는지 빠르게 가려드립니다.">This tells us whether a live stage activation actually makes sense for you right now.</div>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="패키지드 / CPG 제품">Packaged / CPG product</div><div class="opt-sub" data-kr="예: 농심, 삼양, 빙그레, 허니버터칩 · 부스 샘플링 + QR 구매 연결, 오퍼레이션 최소">e.g. Nongshim, Samyang, Binggrae, Honey Butter Chip · booth sampling + QR-to-buy, minimal ops</div></div>
+      <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="음료 / RTD / 주류">Beverage / RTD / alcohol</div><div class="opt-sub" data-kr="예: 막걸리, 소주 브랜드, 제주맥주 · 페스티벌·이벤트 스테이지랑 가장 궁합 좋음">e.g. makgeolli, soju brand, Jeju Beer · best fit for festival & event stages</div></div>
+      <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="프랜차이즈 / 라이센서블 IP">Franchise / licensable IP</div><div class="opt-sub" data-kr="예: 설빙, 봉구비어, 카카오프렌즈 카페 · 현지 오퍼레이터가 운영 가능한 구조">e.g. Sulbing, Bongous Beer, Kakao Friends Cafe · local operator can run it</div></div>
+      <span class="fit-tag fit" data-kr="적합 (스테이지 따라)">Fit (venue-dependent)</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="레스토랑 / 다이닝 경험">Restaurant / dining experience</div><div class="opt-sub" data-kr="예: 파인다이닝, 캐주얼 다이닝, 고깃집 · 셰프 + 주방 + 서비스 이식 필요">e.g. fine dining, casual dining, Korean BBQ · needs chef + kitchen + service transplant</div></div>
+      <span class="fit-tag limited" data-kr="제한적 적합">Limited fit</span>
+    </button>
+
+    <div class="sub-opts" id="b1-sub2" hidden>
+      <div class="sub-q" data-kr="레스토랑은 오퍼레이션 부담이 큰 만큼 — 어떤 모델로 갈래요?">Restaurants are operationally heavier — how would you bring it on stage?</div>
+      <div class="sub-lede" data-kr="모델에 따라 적합한 스테이지가 완전히 달라집니다.">The right model changes which stages actually work for you.</div>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="셋업을 우리가 직접 가져감">We bring our own setup</div><div class="opt-sub" data-kr="푸드트럭, 부스, 팝업 키트 — 브랜드가 직접 운영">Food truck, booth, pop-up kit — brand operates directly</div></div>
+        <span class="fit-tag fit" data-kr="적합">Fit</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="현지 오퍼레이터에 라이센싱">We license to a local operator</div><div class="opt-sub" data-kr="현지 오퍼레이터가 우리 IP로 운영">Local operator runs our IP on the ground</div></div>
+        <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="스테이지가 전부 제공해야 함">We need the venue to provide everything</div><div class="opt-sub" data-kr="브랜드/제품만 제공, 오퍼레이션은 스테이지 담당 · CPG/패키지드 모델에 가까움">We deliver brand/product only, venue handles ops · closer to a CPG/packaged model</div></div>
+        <span class="fit-tag fit" data-kr="CPG 모델">CPG model</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="아직 잘 모르겠음">Not sure yet</div><div class="opt-sub" data-kr="런칭 후 온보딩 콜에서 같이 정리">We'll sort it out together on the onboarding call</div></div>
+        <span class="fit-tag fit" data-kr="온보딩에서 정리">Discuss at onboarding</span>
+      </button>
+    </div>
+  </div>
+
   <div class="nav"><button class="btn-back" type="button" onclick="back('b',0)" data-kr="이전">Back</button><button class="btn-next" id="b1-next" type="button" onclick="next('b',2)" disabled data-kr="다음">Next</button></div>
 </div>
 
@@ -580,6 +634,7 @@ function goHome() {
   document.querySelectorAll('.inp').forEach(i => i.value = '');
   const b5c = $('b5-curated'); if (b5c) b5c.innerHTML = '';
   const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
+  resetB1Subs();
   applyLangForSide();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
@@ -593,6 +648,7 @@ function startSide(s, pushHist) {
   document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
   $(s + '0').classList.add('on');
   document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+  resetB1Subs();
   renderProgress(s, 0);
   applyLangForSide();
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -614,6 +670,7 @@ window.addEventListener('popstate', function() {
     document.querySelectorAll('.inp').forEach(i => i.value = '');
     const b5c = $('b5-curated'); if (b5c) b5c.innerHTML = '';
     const b5r = $('b5-recap'); if (b5r) b5r.innerHTML = '';
+    resetB1Subs();
     applyLangForSide();
     window.scrollTo({ top: 0 });
     // Re-push so subsequent back-press also stays trapped on hook
@@ -638,6 +695,7 @@ function setSide(s) {
   // Re-disable first-step next buttons too
   const firstNext = $(s + '0-next');
   if (firstNext) firstNext.setAttribute('disabled', '');
+  resetB1Subs();
   renderProgress(s, 0);
   applyLangForSide();
 }
@@ -656,9 +714,76 @@ function pick(el, sid) {
   el.closest('.opts').querySelectorAll('.opt-btn').forEach(b => b.classList.remove('sel'));
   el.classList.add('sel');
   const title = el.querySelector('.opt-title');
-  state.answers[sid] = (title ? title.textContent : el.textContent).trim();
+  const val = (title ? title.textContent : el.textContent).trim();
+  state.answers[sid] = val;
+
+  // Special: b1 = F&B reveals nested sub-questions
+  if (sid === 'b1') {
+    const sub = $('b1-sub'), sub2 = $('b1-sub2');
+    const isFB = val.startsWith('F&B');
+    if (sub) {
+      if (isFB) {
+        sub.hidden = false;
+      } else {
+        sub.hidden = true;
+        delete state.answers.b1_sub;
+        delete state.answers.b1_sub2;
+        sub.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+        if (sub2) sub2.hidden = true;
+      }
+    }
+    updateB1Next();
+    return;
+  }
+
   const nb = $(sid + '-next');
   if (nb) nb.removeAttribute('disabled');
+}
+
+function pickSub(el, key) {
+  const wrap = el.closest('.sub-opts');
+  // Only deselect siblings at this level — not nested sub-opts buttons
+  wrap.querySelectorAll(':scope > .opt-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  const title = el.querySelector('.opt-title');
+  state.answers[key] = (title ? title.textContent : el.textContent).trim();
+
+  // b1_sub = Restaurant cascades into b1-sub2
+  if (key === 'b1_sub') {
+    const sub2 = $('b1-sub2');
+    const subVal = state.answers.b1_sub || '';
+    const isRestaurant = subVal.startsWith('Restaurant') || subVal.startsWith('레스토랑');
+    if (sub2) {
+      if (isRestaurant) {
+        sub2.hidden = false;
+      } else {
+        sub2.hidden = true;
+        delete state.answers.b1_sub2;
+        sub2.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
+      }
+    }
+  }
+  updateB1Next();
+}
+
+function updateB1Next() {
+  const nb = $('b1-next');
+  if (!nb) return;
+  const b1 = state.answers.b1 || '';
+  if (!b1) { nb.setAttribute('disabled', ''); return; }
+  if (!b1.startsWith('F&B')) { nb.removeAttribute('disabled'); return; }
+  const sub = state.answers.b1_sub || '';
+  if (!sub) { nb.setAttribute('disabled', ''); return; }
+  const isRestaurant = sub.startsWith('Restaurant') || sub.startsWith('레스토랑');
+  if (!isRestaurant) { nb.removeAttribute('disabled'); return; }
+  if (!state.answers.b1_sub2) { nb.setAttribute('disabled', ''); return; }
+  nb.removeAttribute('disabled');
+}
+
+function resetB1Subs() {
+  const sub = $('b1-sub'), sub2 = $('b1-sub2');
+  if (sub) { sub.hidden = true; sub.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel')); }
+  if (sub2) { sub2.hidden = true; sub2.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel')); }
 }
 
 function next(s, step) {
