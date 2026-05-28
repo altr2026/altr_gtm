@@ -133,8 +133,8 @@ body.is-entry .side-toggle{display:none}
 .opt-title{font-weight:500;margin-bottom:2px;color:var(--text);font-size:14px}
 .opt-sub{font-size:12.5px;color:var(--text-2);font-weight:400;line-height:1.5}
 
-/* ---------- Input ---------- */
-.inp{width:100%;font-size:14px;padding:14px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03);color:var(--text);margin-bottom:8px;outline:none;font-family:inherit;transition:border-color .15s,background .15s;min-height:48px}
+/* ---------- Input — 16px prevents iOS Safari auto-zoom on focus ---------- */
+.inp{width:100%;font-size:16px;padding:14px 14px;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.03);color:var(--text);margin-bottom:8px;outline:none;font-family:inherit;transition:border-color .15s,background .15s;min-height:48px}
 .inp::placeholder{color:var(--text-3)}
 .inp:focus{border-color:var(--line-strong);background:rgba(255,255,255,.05)}
 .inp.err{border-color:var(--err)}
@@ -252,18 +252,44 @@ body.is-hook .intro-actions{max-width:520px;margin-top:8px}
 @media (max-width:480px){
   .card{padding:1.25rem;border-radius:14px}
   body{padding:0}
-  .page{padding:24px 20px 56px;gap:32px}
+  .page{padding:20px 16px 56px;gap:28px}
   .q{font-size:22px}
   .sub{font-size:13.5px}
-  .opt-btn{padding:14px 14px;min-height:48px}
+  .opt-btn{padding:14px 14px;min-height:48px;gap:10px}
   .opt-title{font-size:13.5px}
   .opt-sub{font-size:12px}
-  .fomo{font-size:11.5px;padding:10px 12px}
-  .nav{margin-top:1.25rem}
-  .btn-next{padding:13px 20px;font-size:13.5px}
-  .entry-meta{gap:6px}
+  .fomo{font-size:11.5px;padding:10px 12px;line-height:1.45}
+  .nav{margin-top:1.25rem;gap:8px}
+  .btn-next{padding:13px 18px;font-size:13.5px;min-height:46px;flex:0 1 auto;max-width:75%}
+  .btn-back{padding:10px 8px;min-height:42px;flex-shrink:0}
+  .entry-hero{margin-bottom:32px}
+  .entry-h1{font-size:32px;letter-spacing:-1px;line-height:1.08}
+  .entry-lede{font-size:14px;margin-bottom:24px}
+  .entry-eyebrow{font-size:10px;padding:4px 10px;margin-bottom:16px}
+  .entry-meta{gap:6px;margin-bottom:24px}
   .entry-meta-chip{font-size:10.5px;padding:5px 9px}
-  #b5-curated .opt-btn{padding:16px 14px}
+  .sub-opts{margin-top:16px;padding-top:16px}
+  .sub-opts .sub-q{font-size:14px}
+  .sub-opts .opt-btn{gap:8px;flex-wrap:wrap}
+  .fit-tag{font-size:10px;padding:3px 8px}
+  #b5-curated .opt-btn{padding:16px 14px;min-height:58px}
   #b5-curated .opt-btn .opt-title{font-size:13.5px}
+  #b5-curated .opt-btn .match-hint{font-size:9.5px;padding:3px 7px}
+  .b5-recap{font-size:12px;padding:10px 12px}
+  .match-card{padding:.85rem 1rem}
+  .match-card .match-left{font-size:12.5px}
+  .pill{font-size:10.5px;padding:3px 9px}
+  .topbar{padding:14px 16px}
+  .topbar-logo{height:20px}
   .foot{font-size:10.5px;flex-direction:column;align-items:flex-start;gap:4px}
+}
+
+/* Very narrow (iPhone SE etc., ≤360px) */
+@media (max-width:360px){
+  .page{padding:16px 12px 48px}
+  .card{padding:1rem}
+  .entry-h1{font-size:28px}
+  .q{font-size:20px}
+  .opt-btn{padding:12px}
+  .topbar{padding:12px 14px}
 }
