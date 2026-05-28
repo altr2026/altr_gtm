@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>altr — K-콘텐츠 브랜드 대기리스트</title>
+<meta name="description" content="당신의 카테고리는 이미 무대를 기다리고 있습니다. altr 이 K-콘텐츠 브랜드와 글로벌 Live IP 를 매치합니다.">
+<meta name="theme-color" content="#08080D">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="altr — K-콘텐츠 브랜드 대기리스트">
+<meta property="og:description" content="당신의 카테고리를 이미 찾고 있는 글로벌 Live IP 와 매칭. 런칭 후 48시간 내 첫 매칭.">
+<meta property="og:image" content="/og-image.png">
+<meta property="og:url" content="https://stage.altr.haus/brands/">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="altr — K-콘텐츠 브랜드 대기리스트">
+<meta name="twitter:image" content="/og-image.png">
+
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/favicon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body class="is-entry" data-entry="brand-kr">
+
+<header class="topbar">
+  <a class="topbar-left" href="/" onclick="event.preventDefault(); goHome();" aria-label="홈으로">
+    <img src="/altr-logo-white.png" alt="altr" class="topbar-logo">
+    <div class="topbar-tag">find your stage · be the stage</div>
+  </a>
+</header>
+
+<div class="page">
+
+<div class="card">
+
+<!-- ENTRY HERO -->
+<div class="entry-hero">
+  <div class="entry-eyebrow teal"><span class="pdot"></span><span>파운딩 K-브랜드 · 100석 한정</span></div>
+  <h1 class="entry-h1">
+    <span class="ln1">당신의 카테고리는</span>
+    <span class="ln2">이미 무대를 기다리고 있어요.</span>
+  </h1>
+  <p class="entry-lede">altr 은 카탈로그가 아닙니다. K-콘텐츠 브랜드를 카테고리에 맞는 글로벌 Live IP 와 매치하는 매치메이커. 첫 100 파운딩 브랜드는 런칭 시 마감.</p>
+  <div class="entry-meta">
+    <span class="entry-meta-chip"><span class="dot lime"></span><b>47/100</b> 파운딩 자리 채워짐</span>
+    <span class="entry-meta-chip"><span class="dot teal"></span>런칭 후 <b>48시간 내</b> 첫 매칭</span>
+    <span class="entry-meta-chip"><span class="dot teal"></span><b>6개월 수수료 면제</b></span>
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<!-- BRAND FLOW -->
+<div class="screen" id="b0">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="지금 브랜드는 어느 단계인가요?">Where is your brand right now?</div>
+  <div class="sub" data-kr="당신의 카테고리를 찾고 있는 스테이지와 매칭해드립니다.">We'll match you with stages already looking for exactly what you do.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="100 파운딩 K-브랜드 중 47석 채워짐 · 런칭 시 마감.">47/100 founding K-brand seats taken · closes at launch.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="한국 내 활동, 글로벌 진출 준비">Korea-only, ready to go global</div><div class="opt-sub" data-kr="브랜드는 있고, 스테이지가 필요">We have the brand, we need the stage</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="이미 1–2개 마켓 진출, 확장 원함">Already in 1–2 markets, want to expand</div><div class="opt-sub" data-kr="약간의 해외 진출 경험 있음">We have some overseas presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b0')"><div class="opt-title" data-kr="이미 글로벌, 더 나은 스테이지 큐레이션 원함">Global already, want better stage curation</div><div class="opt-sub" data-kr="활동 중이지만 매칭은 여전히 수동">We're active but matching is still manual</div></button>
+  </div>
+  <div class="nav"><span></span><button class="btn-next" id="b0-next" type="button" onclick="next('b',1)" disabled data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b1">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="브랜드의 비즈니스 영역은?">What does your brand do?</div>
+  <div class="sub" data-kr="이미 당신을 기다리는 Live IP 를 알려줍니다.">This tells us which Live IP is already waiting for you.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="F&B — 레스토랑, 식품, 음료">F&B — restaurant, food product, beverage</div><div class="opt-sub" data-kr="예: 타이거김밥, 농심, 카카오프렌즈카페">e.g. Tiger Gimbap, Nongshim, Kakao Friends Cafe</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="뷰티 / 스킨케어">Beauty / skincare</div><div class="opt-sub" data-kr="예: 이니스프리, 메디힐, 닥터자르트">e.g. Innisfree, Mediheal, Dr.Jart</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="헬스 & 웰니스">Health & wellness</div><div class="opt-sub" data-kr="예: 정관장, 풀무원, 안다르">e.g. KGC, Pulmuone, Andar</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="패션 / 스트릿웨어 / 라이프스타일">Fashion / streetwear / lifestyle</div><div class="opt-sub" data-kr="예: 아더에러, 무신사, 젠틀몬스터">e.g. Ader Error, Musinsa, Gentle Monster</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b1')"><div class="opt-title" data-kr="엔터테인먼트 / 미디어 / 게이밍 IP">Entertainment / media / gaming IP</div><div class="opt-sub" data-kr="예: 웹툰, HYBE IP, e스포츠">e.g. Webtoon, HYBE IP, esports</div></button>
+  </div>
+
+  <div class="sub-opts" id="b1-sub" hidden>
+    <div class="sub-q" data-kr="F&B 안에서도 — 어떤 타입인가요?">Within F&B — what kind?</div>
+    <div class="sub-lede" data-kr="라이브 스테이지가 지금 당신에게 실제로 맞는지 빠르게 가려드립니다.">This tells us whether a live stage activation actually makes sense for you right now.</div>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="패키지드 / CPG 제품">Packaged / CPG product</div><div class="opt-sub" data-kr="예: 농심, 삼양, 빙그레, 허니버터칩 · 부스 샘플링 + QR 구매 연결, 오퍼레이션 최소">e.g. Nongshim, Samyang, Binggrae, Honey Butter Chip · booth sampling + QR-to-buy, minimal ops</div></div>
+      <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="음료 / RTD / 주류">Beverage / RTD / alcohol</div><div class="opt-sub" data-kr="예: 막걸리, 소주 브랜드, 제주맥주 · 페스티벌·이벤트 스테이지랑 가장 궁합 좋음">e.g. makgeolli, soju brand, Jeju Beer · best fit for festival & event stages</div></div>
+      <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="프랜차이즈 / 라이센서블 IP">Franchise / licensable IP</div><div class="opt-sub" data-kr="예: 설빙, 봉구비어, 카카오프렌즈 카페 · 현지 오퍼레이터가 운영 가능한 구조">e.g. Sulbing, Bongous Beer, Kakao Friends Cafe · local operator can run it</div></div>
+      <span class="fit-tag fit" data-kr="적합 (스테이지 따라)">Fit (venue-dependent)</span>
+    </button>
+    <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub')">
+      <div class="opt-content"><div class="opt-title" data-kr="레스토랑 / 다이닝 경험">Restaurant / dining experience</div><div class="opt-sub" data-kr="예: 파인다이닝, 캐주얼 다이닝, 고깃집 · 셰프 + 주방 + 서비스 이식 필요">e.g. fine dining, casual dining, Korean BBQ · needs chef + kitchen + service transplant</div></div>
+      <span class="fit-tag limited" data-kr="제한적 적합">Limited fit</span>
+    </button>
+
+    <div class="sub-opts" id="b1-sub2" hidden>
+      <div class="sub-q" data-kr="레스토랑은 오퍼레이션 부담이 큰 만큼 — 어떤 모델로 갈래요?">Restaurants are operationally heavier — how would you bring it on stage?</div>
+      <div class="sub-lede" data-kr="모델에 따라 적합한 스테이지가 완전히 달라집니다.">The right model changes which stages actually work for you.</div>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="셋업을 우리가 직접 가져감">We bring our own setup</div><div class="opt-sub" data-kr="푸드트럭, 부스, 팝업 키트 — 브랜드가 직접 운영">Food truck, booth, pop-up kit — brand operates directly</div></div>
+        <span class="fit-tag fit" data-kr="적합">Fit</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="현지 오퍼레이터에 라이센싱">We license to a local operator</div><div class="opt-sub" data-kr="현지 오퍼레이터가 우리 IP로 운영">Local operator runs our IP on the ground</div></div>
+        <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="하이브리드 — 핵심 인력은 우리, 운영은 파트너">Hybrid — we send key staff, partner handles operations</div><div class="opt-sub" data-kr="셰프 + 시그니처 메뉴는 우리, 주방 + 서빙은 현지 오퍼레이터. K-레스토랑이 글로벌 가는 가장 현실적 모델.">We bring chef + signature menu, local partner handles kitchen + service. Most realistic model for K-restaurants going global.</div></div>
+        <span class="fit-tag strong" data-kr="높은 적합도">Strong fit</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="스테이지가 전부 제공해야 함">We need the venue to provide everything</div><div class="opt-sub" data-kr="브랜드/제품만 제공, 오퍼레이션은 스테이지 담당 · CPG/패키지드 모델에 가까움">We deliver brand/product only, venue handles ops · closer to a CPG/packaged model</div></div>
+        <span class="fit-tag fit" data-kr="CPG 모델">CPG model</span>
+      </button>
+      <button class="opt-btn" type="button" onclick="pickSub(this,'b1_sub2')">
+        <div class="opt-content"><div class="opt-title" data-kr="아직 잘 모르겠음">Not sure yet</div><div class="opt-sub" data-kr="런칭 후 온보딩 콜에서 같이 정리">We'll sort it out together on the onboarding call</div></div>
+        <span class="fit-tag fit" data-kr="온보딩에서 정리">Discuss at onboarding</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',0)" data-kr="이전">Back</button><button class="btn-next" id="b1-next" type="button" onclick="next('b',2)" disabled data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b2">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="첫 진출 마켓은?">Which market are you trying to enter first?</div>
+  <div class="sub" data-kr="해당 마켓에서 이미 오픈된 기회를 보여드립니다.">We'll show you what's already open in that market.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="UAE 와 일본의 Live IP 가 지금 K-콘텐츠 파트너를 적극 찾고 있습니다.">Live IP in UAE and Japan are actively requesting K-content partners right now.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="UAE / 사우디 / GCC">UAE / Saudi Arabia / GCC</div><div class="opt-sub" data-kr="고소비, 정부 주도 Live IP 확장">High spend, government-backed Live IP expansion</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="일본">Japan</div><div class="opt-sub" data-kr="K-콘텐츠 친화도 높음, F&B 와 뷰티 수요 강함">High K-content affinity, strong F&B and beauty demand</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="동남아 (싱가포르, 태국, 말레이시아, 인도네시아)">Southeast Asia (SG, TH, MY, ID)</div><div class="opt-sub" data-kr="빠르게 성장하는 K-콘텐츠 소비자층">Fast-growing K-content consumer base</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="유럽">Europe</div><div class="opt-sub" data-kr="한류 모멘텀, 프리미엄 포지셔닝">Hallyu momentum, premium positioning</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="미국">US</div><div class="opt-sub" data-kr="최대 K-콘텐츠 시장, 메인스트림 진입">Largest K-content market, mainstream crossover</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b2')"><div class="opt-title" data-kr="추천 받기">Open to recommendations</div><div class="opt-sub" data-kr="브랜드 알려주시면 베스트 핏 마켓 찾아드립니다">Tell us our brand, we'll find the best fit market</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',1)" data-kr="이전">Back</button><button class="btn-next" id="b2-next" type="button" onclick="next('b',3)" disabled data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b3">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="어떤 형태로 스테이지에 등장할래?">How do you want to show up on stage?</div>
+  <div class="sub" data-kr="모든 옵션은 기존 Live IP 내부 — 독립 매장 아님.">All options are inside existing Live IP — not standalone stores.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="부스 / 샘플링">Booth / sampling</div><div class="opt-sub" data-kr="Fee 모델 · 가벼운 풋프린트 — 샘플링, 데모, 시식만">Fee model · light footprint — sampling, demos, tastings only</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="팝업 파트너십 (RS)">Pop-up partnership (RS)</div><div class="opt-sub" data-kr="RS 모델 · Live IP 내 브랜드 큐레이션 팝업. 선불 없음, 판매에 따른 수익 배분.">RS model · brand-curated pop-up inside Live IP. No upfront, revenue share on sales.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="브랜디드 존">Branded zone</div><div class="opt-sub" data-kr="Fee 모델 · 풀 브랜드 컨트롤, 시즌 또는 연간 운영">Fee model · full brand control, season or annual presence</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b3')"><div class="opt-title" data-kr="모두 오픈">Open to all</div><div class="opt-sub" data-kr="K-콘텐츠 브랜드에 맞는 걸 보여주세요">Show me what fits K-content brand</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',2)" data-kr="이전">Back</button><button class="btn-next" id="b3-next" type="button" onclick="next('b',4)" disabled data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b4">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="지금 가장 큰 장벽은?">Biggest barrier right now?</div>
+  <div class="sub" data-kr="altr 이 가장 먼저 해결해드릴 부분입니다.">This is what altr solves first for you.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="대기리스트의 대다수 브랜드가 같은 답을 했어요 — 혼자가 아닙니다.">Most brands on our waitlist said exactly this — you're not alone.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="맞는 스테이지 찾기 (어디로 가야 할지 모름)">Finding the right stage (I don't know where to go)</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="현지 실행 (어디로 갈지는 알지만, 혼자 운영 불가)">Local execution (I know where, but can't run it alone)</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="국경 간 결제 및 계약">Cross-border payments and contracts</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="내부 이해관계자에게 ROI 증명">Proving ROI to internal stakeholders</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'b4')"><div class="opt-title" data-kr="위 전부 해당">All of the above</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',3)" data-kr="이전">Back</button><button class="btn-next" id="b4-next" type="button" onclick="next('b',5)" disabled data-kr="다음">Next</button></div>
+</div>
+
+<div class="screen" id="b5">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="이걸 고를 거라고 생각했어요. 맞나요?">We think you'd pick one of these. Right?</div>
+  <div class="sub" data-kr="여기까지 받은 정보로 우리가 추측한 매치. 맞으면 탭, 아니면 아래에 직접 입력.">Inferred from what you've told us so far. Tap to confirm — or type something else below.</div>
+  <div class="fomo"><span class="dot"></span><span data-kr="여기서 고른 Live IP 가 altr 에 합류하는 순간 — 당신이 매칭 큐 첫 번째.">When the Live IP you pick joins altr, you go first in their matching queue.</span></div>
+  <div id="b5-recap" class="b5-recap"></div>
+  <div id="b5-curated"></div>
+  <div class="b5-or" data-kr="혹은, 사실은 —">Or, actually —</div>
+  <input class="inp" type="text" id="b-golden" maxlength="200" placeholder="다른 이벤트 / Live IP 이름 입력…" data-kr-placeholder="다른 이벤트 / Live IP 이름 입력…" oninput="onGoldenInput()">
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',4)" data-kr="이전">Back</button><button class="btn-next" id="b5-next" type="button" onclick="advanceGolden()" data-kr="아무거나 베스트 핏으로 매칭 →">Surprise me — best fit →</button></div>
+</div>
+
+<div class="screen" id="b6">
+  <span class="pill pill-teal">K-콘텐츠 브랜드</span>
+  <div class="q" data-kr="마지막 단계 — 연락처 알려주세요">Last step — how do we reach you?</div>
+  <div class="sub" data-kr="런칭 후 48시간 내 첫 스테이지 매칭 발송.">We'll send your first stage matches within 48 hours of launch.</div>
+  <input class="inp" name="org" type="text" placeholder="브랜드명" autocomplete="organization" data-kr-placeholder="브랜드명">
+  <input class="inp" name="name" type="text" placeholder="이름 + 직책" autocomplete="name" data-kr-placeholder="이름 + 직책">
+  <input class="inp" name="email" type="email" placeholder="업무 이메일" autocomplete="email" data-kr-placeholder="업무 이메일">
+  <div class="errmsg" id="b-err" hidden></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('b',5)" data-kr="이전">Back</button><button class="btn-next" id="b-submit" type="button" onclick="submit('b')" data-kr="내 스테이지 매칭 받기 →">Get my stage matches →</button></div>
+</div>
+
+<div class="screen" id="b7">
+  <span class="pill pill-teal" data-kr="대기리스트 등록 완료">You're on the list</span>
+  <div class="q" data-kr="당신을 위한 매칭">Here's what we matched for you</div>
+  <div class="sub" data-kr="지금 K-콘텐츠 브랜드를 적극 찾고 있는 스테이지. 런칭 시 구체적 매칭 발송.">Stages actively looking for K-content brands right now. We'll send your specific matches at launch.</div>
+  <div class="fomo">
+    <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <span data-kr="파운딩 K-브랜드 #48 of 100. 첫 웨이브는 런칭 시 마감.">Founding K-brand #48 of 100. First wave sealed at launch.</span>
+  </div>
+  <div class="perks">
+    <div class="perks-title" data-kr="파운딩 100 혜택">Founding 100 receive</div>
+    <ul>
+      <li data-kr="우선 매칭 — Live IP 확정 즉시 큐 첫 번째">Priority matching — first in queue as Live IP confirm</li>
+      <li data-kr="첫 6개월 플랫폼 수수료 면제">No platform fees for the first 6 months</li>
+      <li data-kr="altr 프로필에 영구 파운딩 배지">Permanent founding badge on your altr profile</li>
+      <li data-kr="파운딩 Live IP 파트너 직접 소개">Direct intros to founding Live IP partners</li>
+    </ul>
+  </div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="라이프스타일 리조트 · 알프스 / 스키">Lifestyle resort · Alpine / ski</div><div style="font-size:12px;color:#888780" data-kr="유럽 · 3개 Live IP 가 K-F&B 요청">Europe · 3 Live IP requesting K-F&amp;B</div></div><span class="match-tag" data-kr="높은 적합도">Strong fit</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="럭셔리 호텔 · 팝업 슬롯">Luxury hotel · pop-up slot</div><div style="font-size:12px;color:#888780" data-kr="두바이 · 2개 프로퍼티 Q3 오픈">Dubai · 2 properties open Q3</div></div><span class="match-tag" data-kr="높은 수요">High demand</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px" data-kr="문화 페스티벌 · 푸드 빌리지">Cultural festival · food village</div><div style="font-size:12px;color:#888780" data-kr="일본 · 1슬롯 남음">Japan · 1 slot remaining</div></div><span class="match-tag" data-kr="1슬롯 남음">1 slot left</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem" data-kr="다른 K-브랜드를 추천하고 순번을 앞당기세요.">Refer another K-brand and move up the list.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)" data-kr="공유 링크 복사">Copy share link</button>
+</div>
+
+<footer class="foot">
+  <span>altr — find your stage · be the stage</span>
+  <a href="mailto:hello@altr.haus">hello@altr.haus</a>
+</footer>
+
+</div><!-- /.card -->
+
+</div><!-- /.page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/app.js"></script>
+</body>
+</html>
