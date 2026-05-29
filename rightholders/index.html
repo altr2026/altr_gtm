@@ -59,6 +59,8 @@
 <div class="progress" id="progress"></div>
 
 <!-- VENUE FLOW -->
+
+<!-- Step 1: Property type (Meta entry) -->
 <div class="screen" id="v0">
   <span class="pill pill-purple">Global Live IP</span>
   <div class="q">What brings your audience together?</div>
@@ -74,6 +76,7 @@
   <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled>Next</button></div>
 </div>
 
+<!-- Step 2: Region (LinkedIn entry — back hidden in CSS) -->
 <div class="screen" id="v1">
   <span class="pill pill-purple">Global Live IP</span>
   <div class="q">Where are you located?</div>
@@ -90,46 +93,83 @@
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled>Next</button></div>
 </div>
 
+<!-- Step 3: Audience size (NEW) -->
 <div class="screen" id="v2">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">What kind of brand partner are you looking for?</div>
-  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
+  <div class="q">What's your annual reach?</div>
+  <div class="sub">Tells us which K-brand budgets fit — we'll surface partners proportional to your scale.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-food &amp; beverage</div><div class="opt-sub">pop-up, sampling, tasting</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-beauty &amp; wellness</div><div class="opt-sub">demo booth, experience zone</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-fashion &amp; lifestyle</div><div class="opt-sub">pop-up store, showroom</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">K-entertainment &amp; IP</div><div class="opt-sub">fan activation, immersive experience</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Multiple categories</div><div class="opt-sub">show us everything available</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Traditional sponsor</div><div class="opt-sub">capital sponsor with activation budget</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Under 5,000</div><div class="opt-sub">Boutique · invitation-only · members club</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">5,000 — 50,000</div><div class="opt-sub">Mid-tier venue or annual event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">50,000 — 250,000</div><div class="opt-sub">Major venue · multi-day event · destination property</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">250,000 — 1M</div><div class="opt-sub">Large-scale event · district programming</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">1M+</div><div class="opt-sub">Flagship destination · mega-event · stadium-class</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled>Next</button></div>
 </div>
 
+<!-- Step 4: Brand preference -->
 <div class="screen" id="v3">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">How many activation slots in the next 12 months?</div>
-  <div class="sub">This tells us how many brand matches to line up for you.</div>
+  <div class="q">What kind of brand partner are you looking for?</div>
+  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">1–3 slots — selective and curated</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">4–10 slots — regular programming</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">10+ slots — we want ongoing partners</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Flexible — depends on the fit</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-food &amp; beverage</div><div class="opt-sub">pop-up, sampling, tasting</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-beauty &amp; wellness</div><div class="opt-sub">demo booth, experience zone</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-fashion &amp; lifestyle</div><div class="opt-sub">pop-up store, showroom</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-entertainment &amp; IP</div><div class="opt-sub">fan activation, immersive experience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Multiple categories</div><div class="opt-sub">show us everything available</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Traditional sponsor</div><div class="opt-sub">capital sponsor with activation budget</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled>Next</button></div>
 </div>
 
+<!-- Step 5: Partnership model (NEW) -->
 <div class="screen" id="v4">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">Last step — let's connect.</div>
-  <div class="sub">We'll send your first K-content brand matches within 48 hours of launch.</div>
-  <input class="inp" name="org" type="text" placeholder="Stage name" autocomplete="organization">
-  <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
-  <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
-  <div class="errmsg" id="v-err" hidden></div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+  <div class="q">How do you partner with brands?</div>
+  <div class="sub">Sets which deal structures we'll match you with. No wrong answer — but the right brands depend on this.</div>
+  <div class="fomo"><span class="dot"></span><span>Most Live IP on our waitlist accept revenue share for K-brand pilots.</span></div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Revenue share (RS)</div><div class="opt-sub">No upfront · share on sales or activations. Lowers barrier for K-brand pilots.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Capital sponsorship</div><div class="opt-sub">Brand pays activation fee upfront. Best for proven brands with launch budgets.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Open to both</div><div class="opt-sub">Depends on the brand and the slot — we'll evaluate case by case.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Not sure yet</div><div class="opt-sub">We'll figure out the right model together at onboarding.</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v4-next" type="button" onclick="next('v',5)" disabled>Next</button></div>
 </div>
 
+<!-- Step 6: Slots + Contact (merged) -->
 <div class="screen" id="v5">
+  <span class="pill pill-purple">Global Live IP</span>
+  <div class="q">Last step — slots and contact.</div>
+  <div class="sub">How many brand matches to line up, and where to send them. We'll send within 48 hours of launch.</div>
+
+  <div class="merged-section">
+    <div class="merged-label">Activation slots in the next 12 months</div>
+    <div class="opts" id="v-slots-opts">
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">1–3 slots — selective and curated</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">4–10 slots — regular programming</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">10+ slots — we want ongoing partners</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">Flexible — depends on the fit</div></button>
+    </div>
+  </div>
+
+  <div class="merged-divider"></div>
+
+  <div class="merged-section">
+    <div class="merged-label">Your contact</div>
+    <input class="inp" name="org" type="text" placeholder="Stage name" autocomplete="organization">
+    <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
+    <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  </div>
+
+  <div class="errmsg" id="v-err" hidden></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',4)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+</div>
+
+<!-- Success -->
+<div class="screen" id="v6">
   <span class="pill pill-purple">You're on the list</span>
   <div class="q">Brands already waiting for your stage</div>
   <div class="sub">These K-content categories have brands on our waitlist looking for your market.</div>

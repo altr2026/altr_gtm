@@ -5,9 +5,9 @@ const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.leng
 const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 const state = { side: 'b', answers: {}, lang: 'en', userLang: 'en' };
-const STEPS = { b: 7, v: 5 };
-const FINAL_FORM = { b: 6, v: 4 };
-const SUCCESS = { b: 7, v: 5 };
+const STEPS = { b: 7, v: 6 };
+const FINAL_FORM = { b: 6, v: 5 };
+const SUCCESS = { b: 7, v: 6 };
 
 const URL_PARAMS = (() => {
   const p = new URLSearchParams(location.search), o = {};
@@ -102,16 +102,19 @@ function goHome() {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-function startSide(s, pushHist) {
+function startSide(s, pushHist, startStep) {
   document.body.classList.remove('is-hook');
   state.side = s;
   state.answers = {};
   document.querySelectorAll('.side-btn').forEach(b => b.classList.toggle('on', b.dataset.side === s));
   document.querySelectorAll('.screen').forEach(sc => sc.classList.remove('on'));
-  $(s + '0').classList.add('on');
+  const initial = startStep || 0;
+  const target = $(s + initial);
+  if (target) target.classList.add('on');
+  else $(s + '0').classList.add('on');
   document.querySelectorAll('.opt-btn.sel').forEach(b => b.classList.remove('sel'));
   resetB1Subs();
-  renderProgress(s, 0);
+  renderProgress(s, initial);
   applyLangForSide();
   window.scrollTo({ top: 0, behavior: 'smooth' });
   if (pushHist !== false && !IS_ENTRY_PAGE) {
@@ -548,6 +551,9 @@ async function submit(s) {
     if (el) { el.classList.add('err'); el.focus(); }
   };
 
+  if (s === 'v' && !state.answers.v_slots) {
+    return showErr('Please pick how many activation slots you have.', null);
+  }
   if (!org) return showErr(s === 'b' ? t('err_brand') : t('err_venue'), orgEl);
   if (!name) return showErr(t('err_name'), nameEl);
   if (!email || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) return showErr(t('err_email'), emailEl);
@@ -624,7 +630,14 @@ function copyShare(btn) {
     setLang(langName === 'kr' ? 'kr' : 'en', false);
     document.body.classList.remove('is-hook');
     document.body.classList.add('is-entry');
-    startSide(side, false);
+
+    // Ad source segmentation — annotates body + decides starting step
+    const src = (URL_PARAMS.src || '').toLowerCase();
+    if (src) document.body.classList.add('is-src-' + src);
+
+    // LinkedIn venue traffic already knows they're a venue → skip Property type
+    const startStep = (side === 'v' && src === 'linkedin') ? 1 : 0;
+    startSide(side, false, startStep);
     return;
   }
 
