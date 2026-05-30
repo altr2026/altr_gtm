@@ -635,6 +635,20 @@ function copyShare(btn) {
     const src = (URL_PARAMS.src || URL_PARAMS.utm_source || '').toLowerCase();
     if (src) document.body.classList.add('is-src-' + src);
 
+    // Campaign-specific hero line swaps — append market context to ln2 for each campaign
+    const campaign = (URL_PARAMS.utm_campaign || '').toLowerCase();
+    const CAMPAIGN_LN2 = {
+      'gcc_rh': 'They need your <span class="accent-lime">LIVE</span> stage in GCC.',
+      'jp_rh':  'They need your <span class="accent-lime">LIVE</span> stage in Japan.',
+      'eu_rh':  'They need your <span class="accent-lime">LIVE</span> stage in Europe.',
+      'sea_rh': 'They need your <span class="accent-lime">LIVE</span> stage in SEA.',
+      'us_rh':  'They need your <span class="accent-lime">LIVE</span> stage in the US.'
+    };
+    const ln2El = $('hero-ln2');
+    if (ln2El && CAMPAIGN_LN2[campaign]) {
+      ln2El.innerHTML = CAMPAIGN_LN2[campaign];
+    }
+
     // LinkedIn venue traffic already knows they're a venue → skip Property type
     const startStep = (side === 'v' && src === 'linkedin') ? 1 : 0;
     startSide(side, false, startStep);
