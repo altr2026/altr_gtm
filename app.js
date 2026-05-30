@@ -649,11 +649,10 @@ function copyShare(btn) {
       ln2El.innerHTML = CAMPAIGN_LN2[campaign];
     }
 
-    // LinkedIn venue traffic normally skips v0 (Property type) — campaign pages
-    // with their own first screen opt out via data-no-skip="true"
-    const noSkip = document.body.dataset.noSkip === 'true';
-    const startStep = (!noSkip && side === 'v' && src === 'linkedin') ? 1 : 0;
-    startSide(side, false, startStep);
+    // LinkedIn traffic now lands on dedicated campaign URLs (/rh/gcc, etc.).
+    // The generic /rightholders/ page no longer auto-skips Property type for
+    // LinkedIn — it stays as the canonical organic flow that starts at v0.
+    startSide(side, false, 0);
     return;
   }
 

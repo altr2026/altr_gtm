@@ -170,9 +170,6 @@ body.is-entry .side-toggle{display:none}
 .merged-section .opts{margin-bottom:0}
 .merged-divider{height:1px;background:var(--line);margin:24px 0 20px}
 
-/* ---------- LinkedIn entry: hide back on first reachable step (v1) ---------- */
-body.is-src-linkedin #v1 .btn-back{visibility:hidden}
-
 /* ---------- Sub-question (F&B, Restaurant cascade) ---------- */
 .sub-opts{margin-top:20px;padding-top:20px;border-top:1px dashed var(--line);display:flex;flex-direction:column;gap:8px}
 .sub-opts[hidden]{display:none}
