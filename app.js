@@ -5,9 +5,9 @@ const hasSupabase = SUPABASE_URL.indexOf('http') === 0 && SUPABASE_ANON_KEY.leng
 const sb = hasSupabase ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY) : null;
 
 const state = { side: 'b', answers: {}, lang: 'en', userLang: 'en' };
-const STEPS = { b: 7, v: 6 };
-const FINAL_FORM = { b: 6, v: 5 };
-const SUCCESS = { b: 7, v: 6 };
+const STEPS = { b: 7, v: 7 };
+const FINAL_FORM = { b: 6, v: 6 };
+const SUCCESS = { b: 7, v: 7 };
 
 const URL_PARAMS = (() => {
   const p = new URLSearchParams(location.search), o = {};

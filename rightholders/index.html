@@ -4,12 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>altr — Global Live IP waitlist</title>
-<meta name="description" content="K-content brands have budget. They need your stage. Founding 50 Live IP get first-look on incoming K-brand requests before competing venues in your region.">
+<meta name="description" content="K-content brands have budget. They need your stage. altr matches Live IP with K-content brands by mandate, not catalogue.">
 <meta name="theme-color" content="#08080D">
 
 <meta property="og:type" content="website">
 <meta property="og:title" content="altr — Global Live IP waitlist">
-<meta property="og:description" content="K-content brands have budget. They need your stage. Founding 50 Live IP get first-look on incoming K-brand requests.">
+<meta property="og:description" content="K-content brands have budget. They need your stage. altr matches by mandate, not catalogue.">
 <meta property="og:image" content="https://stage.altr.haus/rightholders/og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -48,11 +48,9 @@
     <span class="ln1">K-content brands have budget.</span>
     <span class="ln2">They need your stage.</span>
   </h1>
-  <p class="entry-lede">By mandate, not catalogue. Founding 50 Live IP get first-look on incoming K-brand requests before competing venues in your region.</p>
+  <p class="entry-lede">By mandate, not catalogue. altr matches Live IP with K-content brands. Founding cohort: 50 seats per market.</p>
   <div class="entry-meta">
     <span class="entry-meta-chip"><span class="dot purple"></span><b>31/50</b> founding seats filled</span>
-    <span class="entry-meta-chip"><span class="dot purple"></span><b>First-look</b> on incoming requests</span>
-    <span class="entry-meta-chip"><span class="dot purple"></span><b>6 months</b> no platform fees</span>
   </div>
 </div>
 
@@ -65,7 +63,6 @@
   <span class="pill pill-purple">Global Live IP</span>
   <div class="q">What brings your audience together?</div>
   <div class="sub">We'll match you with K-content brands already looking for your type of Live IP.</div>
-  <div class="fomo"><span class="dot"></span><span>31/50 founding Live IP seats per market · first-look before competing Live IP in your region.</span></div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Large-scale event IP · arena · stadium · district</div><div class="opt-sub">Mass audience. Anchor sponsorships and headline brand activations.</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v0')"><div class="opt-title">Hospitality IP · resort · hotel · club</div><div class="opt-sub">Your space is the experience. 365-day captive audience.</div></button>
@@ -76,12 +73,11 @@
   <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled>Next</button></div>
 </div>
 
-<!-- Step 2: Region (LinkedIn entry — back hidden in CSS) -->
+<!-- Step 2: Region (LinkedIn entry — back hidden via CSS) -->
 <div class="screen" id="v1">
   <span class="pill pill-purple">Global Live IP</span>
   <div class="q">Where are you located?</div>
   <div class="sub">K-content brands have specific market priorities — let's see who's looking at your region.</div>
-  <div class="fomo"><span class="dot"></span><span>Japan and UAE are the most requested markets from K-content brands on our waitlist.</span></div>
   <div class="opts">
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">UAE / Saudi Arabia / GCC</div></button>
     <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Japan</div></button>
@@ -93,64 +89,78 @@
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled>Next</button></div>
 </div>
 
-<!-- Step 3: Audience size (NEW) -->
+<!-- Step 3: LIVE engagement format (NEW) -->
 <div class="screen" id="v2">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">What's your annual reach?</div>
-  <div class="sub">Tells us which K-brand budgets fit — we'll surface partners proportional to your scale.</div>
+  <div class="q">What kind of LIVE engagement do you host?</div>
+  <div class="sub">altr matches short to mid-length activations — typically a few days to ~3 months. Pick what's closest to your usual format.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Under 5,000</div><div class="opt-sub">Boutique · invitation-only · members club</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">5,000 — 50,000</div><div class="opt-sub">Mid-tier venue or annual event</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">50,000 — 250,000</div><div class="opt-sub">Major venue · multi-day event · destination property</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">250,000 — 1M</div><div class="opt-sub">Large-scale event · district programming</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">1M+</div><div class="opt-sub">Flagship destination · mega-event · stadium-class</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">1-day moment · single-day activation</div><div class="opt-sub">Brand integration on event day. Sampling, demo, stage moment.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Short pop-up (3–14 days)</div><div class="opt-sub">Festival booth, flash store, week-long brand zone.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Mid-term residency (1–3 months)</div><div class="opt-sub">Seasonal pop-up, themed activation, multi-week residency.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Mix of formats — flexible</div><div class="opt-sub">Different brands, different durations across the calendar.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Longer integrations (3+ months)</div><div class="opt-sub">Outside altr's current matching scope — we'll note for future.</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled>Next</button></div>
 </div>
 
-<!-- Step 4: Brand preference -->
+<!-- Step 4: Audience per engagement (REFRAMED) -->
 <div class="screen" id="v3">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">What kind of brand partner are you looking for?</div>
-  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
+  <div class="q">How many people show up per engagement?</div>
+  <div class="sub">Per pop-up, per residency, per event — not annual. Tells us which K-brand budgets fit your scale.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-food &amp; beverage</div><div class="opt-sub">pop-up, sampling, tasting</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-beauty &amp; wellness</div><div class="opt-sub">demo booth, experience zone</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-fashion &amp; lifestyle</div><div class="opt-sub">pop-up store, showroom</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">K-entertainment &amp; IP</div><div class="opt-sub">fan activation, immersive experience</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Multiple categories</div><div class="opt-sub">show us everything available</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Traditional sponsor</div><div class="opt-sub">capital sponsor with activation budget</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Under 1,000 per engagement</div><div class="opt-sub">Boutique · invitation-only · members club</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">1,000 — 10,000 per engagement</div><div class="opt-sub">Mid-tier venue or curated event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">10,000 — 100,000 per engagement</div><div class="opt-sub">Major venue · multi-day event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">100,000 — 500,000 per engagement</div><div class="opt-sub">Large-scale event · destination property</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">500,000+ per engagement</div><div class="opt-sub">Flagship · mega-event · stadium-class</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled>Next</button></div>
 </div>
 
-<!-- Step 5: Partnership model (NEW) -->
+<!-- Step 5: Brand preference -->
 <div class="screen" id="v4">
   <span class="pill pill-purple">Global Live IP</span>
-  <div class="q">How do you partner with brands?</div>
-  <div class="sub">Sets which deal structures we'll match you with. No wrong answer — but the right brands depend on this.</div>
-  <div class="fomo"><span class="dot"></span><span>Most Live IP on our waitlist accept revenue share for K-brand pilots.</span></div>
+  <div class="q">What kind of brand partner are you looking for?</div>
+  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
   <div class="opts">
-    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Revenue share (RS)</div><div class="opt-sub">No upfront · share on sales or activations. Lowers barrier for K-brand pilots.</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Capital sponsorship</div><div class="opt-sub">Brand pays activation fee upfront. Best for proven brands with launch budgets.</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Open to both</div><div class="opt-sub">Depends on the brand and the slot — we'll evaluate case by case.</div></button>
-    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Not sure yet</div><div class="opt-sub">We'll figure out the right model together at onboarding.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-food &amp; beverage</div><div class="opt-sub">pop-up, sampling, tasting</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-beauty &amp; wellness</div><div class="opt-sub">demo booth, experience zone</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-fashion &amp; lifestyle</div><div class="opt-sub">pop-up store, showroom</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-entertainment &amp; IP</div><div class="opt-sub">fan activation, immersive experience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Multiple categories</div><div class="opt-sub">show us everything available</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Traditional sponsor</div><div class="opt-sub">capital sponsor with activation budget</div></button>
   </div>
   <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v4-next" type="button" onclick="next('v',5)" disabled>Next</button></div>
 </div>
 
-<!-- Step 6: Slots + Contact (merged) -->
+<!-- Step 6: Partnership model -->
 <div class="screen" id="v5">
   <span class="pill pill-purple">Global Live IP</span>
+  <div class="q">How do you partner with brands?</div>
+  <div class="sub">Sets which deal structures we'll match you with. No wrong answer — but the right brands depend on this.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Revenue share (RS)</div><div class="opt-sub">No upfront · share on sales or activations. Lowers barrier for K-brand pilots.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Capital sponsorship</div><div class="opt-sub">Brand pays activation fee upfront. Best for proven brands with launch budgets.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Open to both</div><div class="opt-sub">Depends on the brand and the slot — we evaluate case by case.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Not sure yet</div><div class="opt-sub">We'll figure out the right model together at onboarding.</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',4)">Back</button><button class="btn-next" id="v5-next" type="button" onclick="next('v',6)" disabled>Next</button></div>
+</div>
+
+<!-- Step 7: Slots + Contact (merged) -->
+<div class="screen" id="v6">
+  <span class="pill pill-purple">Global Live IP</span>
   <div class="q">Last step — slots and contact.</div>
-  <div class="sub">How many brand matches to line up, and where to send them. We'll send within 48 hours of launch.</div>
+  <div class="sub">How many brand engagements to line up over the next 12 months, and where to reach you.</div>
 
   <div class="merged-section">
-    <div class="merged-label">Activation slots in the next 12 months</div>
+    <div class="merged-label">Brand engagements in the next 12 months</div>
     <div class="opts" id="v-slots-opts">
-      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">1–3 slots — selective and curated</div></button>
-      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">4–10 slots — regular programming</div></button>
-      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">10+ slots — we want ongoing partners</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">1–3 — selective and curated</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">4–10 — regular programming</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">10+ — ongoing partner cadence</div></button>
       <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">Flexible — depends on the fit</div></button>
     </div>
   </div>
@@ -165,18 +175,14 @@
   </div>
 
   <div class="errmsg" id="v-err" hidden></div>
-  <div class="nav"><button class="btn-back" type="button" onclick="back('v',4)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',5)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
 </div>
 
 <!-- Success -->
-<div class="screen" id="v6">
+<div class="screen" id="v7">
   <span class="pill pill-purple">You're on the list</span>
   <div class="q">Brands already waiting for your stage</div>
   <div class="sub">These K-content categories have brands on our waitlist looking for your market.</div>
-  <div class="fomo">
-    <svg class="check" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 8.5L6.5 12L13 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <span>Founding Live IP confirmed. First-look on 31 K-brands before competing Live IP in your region.</span>
-  </div>
   <div class="perks lavender">
     <div class="perks-title">Founding Live IP receive</div>
     <ul>
