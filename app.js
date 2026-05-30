@@ -631,8 +631,8 @@ function copyShare(btn) {
     document.body.classList.remove('is-hook');
     document.body.classList.add('is-entry');
 
-    // Ad source segmentation — annotates body + decides starting step
-    const src = (URL_PARAMS.src || '').toLowerCase();
+    // Ad source segmentation — supports both ?src= shortcut and standard ?utm_source=
+    const src = (URL_PARAMS.src || URL_PARAMS.utm_source || '').toLowerCase();
     if (src) document.body.classList.add('is-src-' + src);
 
     // LinkedIn venue traffic already knows they're a venue → skip Property type
