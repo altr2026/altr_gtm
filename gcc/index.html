@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>altr — Global Live IP waitlist</title>
+<meta name="description" content="K-content brands have budget. They need your stage.">
+<meta name="robots" content="noindex">
+<link rel="canonical" href="https://stage.altr.haus/rightholders/">
+
+<!-- LinkedIn ad redirect: /gcc → /rightholders/ with UTM attribution preserved -->
+<meta http-equiv="refresh" content="0; url=/rightholders/?utm_source=linkedin&utm_campaign=gcc_rh">
+<script>
+// JS fallback in case meta refresh is blocked or delayed
+(function() {
+  var params = new URLSearchParams(location.search);
+  var dest = '/rightholders/?utm_source=linkedin&utm_campaign=gcc_rh';
+  // Preserve any extra UTM params LinkedIn may append (utm_term, fbclid, etc.)
+  params.forEach(function(value, key) {
+    if (!['utm_source', 'utm_campaign'].includes(key)) {
+      dest += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(value);
+    }
+  });
+  location.replace(dest);
+})();
+</script>
+<style>body{background:#08080D;color:#9F9FA9;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-size:14px}</style>
+</head>
+<body>Redirecting…</body>
+</html>
