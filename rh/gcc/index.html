@@ -6,9 +6,7 @@
 <title>altr — Live IP waitlist · GCC</title>
 <meta name="description" content="Looking for event sponsorships or pop-up partners in GCC? altr matches you with K-content brands by category mandate. Founding 50 Live IP.">
 <meta name="theme-color" content="#08080D">
-<meta name="robots" content="noindex">
 
-<!-- Campaign-specific OG so LinkedIn/social previews show GCC variant -->
 <meta property="og:type" content="website">
 <meta property="og:title" content="altr — Live IP waitlist · GCC">
 <meta property="og:description" content="Looking for event sponsorships or pop-up partners in GCC? altr matches you with K-content brands by category mandate. Founding 50 Live IP.">
@@ -19,29 +17,245 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="altr — Live IP waitlist · GCC">
-<meta name="twitter:description" content="K-content brands have budget. They need your LIVE stage in GCC.">
+<meta name="twitter:description" content="Looking for event sponsorships or pop-up partners in GCC? altr matches you with K-content brands.">
 <meta name="twitter:image" content="https://stage.altr.haus/rh/gcc/og-image.png">
 
 <link rel="icon" type="image/png" href="/favicon.png">
-<link rel="canonical" href="https://stage.altr.haus/rightholders/">
+<link rel="apple-touch-icon" href="/favicon.png">
 
-<!-- LinkedIn ad redirect: /rh/gcc → /rightholders/ with UTM attribution preserved -->
-<meta http-equiv="refresh" content="0; url=/rightholders/?utm_source=linkedin&utm_campaign=gcc_rh">
-<script>
-// JS fallback in case meta refresh is blocked or delayed
-(function() {
-  var params = new URLSearchParams(location.search);
-  var dest = '/rightholders/?utm_source=linkedin&utm_campaign=gcc_rh';
-  // Preserve any extra UTM params LinkedIn may append (utm_term, fbclid, etc.)
-  params.forEach(function(value, key) {
-    if (!['utm_source', 'utm_campaign'].includes(key)) {
-      dest += '&' + encodeURIComponent(key) + '=' + encodeURIComponent(value);
-    }
-  });
-  location.replace(dest);
-})();
-</script>
-<style>body{background:#08080D;color:#9F9FA9;font-family:-apple-system,BlinkMacSystemFont,sans-serif;display:flex;align-items:center;justify-content:center;height:100vh;margin:0;font-size:14px}</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="/styles.css">
 </head>
-<body>Redirecting…</body>
+<body class="is-entry" data-entry="venue-en" data-no-skip="true">
+
+<header class="topbar">
+  <a class="topbar-left" href="/" onclick="event.preventDefault(); goHome();" aria-label="Back to home">
+    <img src="/altr-logo-white.png" alt="altr" class="topbar-logo">
+    <div class="topbar-tag">find your stage · be the stage</div>
+  </a>
+</header>
+
+<div class="page">
+
+<div class="card">
+
+<!-- ENTRY HERO -->
+<div class="entry-hero">
+  <div class="entry-eyebrow teal"><span class="pdot"></span><span>Founding Live IP · GCC · 50 seats</span></div>
+  <h1 class="entry-h1">
+    <span class="ln1">K-content brands have budget.</span>
+    <span class="ln2" id="hero-ln2">They need your <span class="accent-lime">LIVE</span> stage in GCC.</span>
+  </h1>
+  <p class="entry-lede">Looking for event sponsorships or pop-up partners? altr matches you with K-content brands by category mandate — not catalogue browse. GCC is altr's core launch market.</p>
+  <div class="entry-meta">
+    <span class="entry-meta-chip"><span class="dot lime-pulse"></span><b>31/50</b> founding seats filled</span>
+  </div>
+</div>
+
+<div class="progress" id="progress"></div>
+
+<!-- GCC-SPECIFIC VENUE FLOW -->
+
+<!-- Step 1: City (GCC pre-qualified, narrow to exact location) -->
+<div class="screen" id="v0">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">Where exactly is your stage?</div>
+  <div class="sub">You're already in our core launch market — let's narrow to the city so we route the right brands to you.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, false)"><div class="opt-title">UAE — Dubai</div></button>
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, false)"><div class="opt-title">UAE — Abu Dhabi</div></button>
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, false)"><div class="opt-title">UAE — Ras Al Khaimah (RAK)</div></button>
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, false)"><div class="opt-title">Saudi Arabia — Riyadh</div></button>
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, false)"><div class="opt-title">Qatar — Doha</div></button>
+    <button class="opt-btn" type="button" onclick="pickGccCity(this, true)"><div class="opt-title">Other GCC</div><div class="opt-sub">Type your city below</div></button>
+  </div>
+  <input class="inp" type="text" id="v_other_gcc" placeholder="City, country (e.g., Manama, Bahrain)" oninput="onOtherGccInput()" hidden>
+  <div class="nav"><span></span><button class="btn-next" id="v0-next" type="button" onclick="next('v',1)" disabled>Next</button></div>
+</div>
+
+<!-- Step 2: Property type (What brings your audience together?) -->
+<div class="screen" id="v1">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">What brings your audience together?</div>
+  <div class="sub">We'll match you with K-content brands already looking for your type of Live IP.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Large-scale event IP · arena · stadium · district</div><div class="opt-sub">Mass audience. Anchor sponsorships and headline brand activations.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Hospitality IP · resort · hotel · club</div><div class="opt-sub">Your space is the experience. 365-day captive audience.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Festival &amp; cultural IP · music · art · culture</div><div class="opt-sub">Annual or recurring live event with owned audience.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Retail activation IP · mall · mixed-use · market</div><div class="opt-sub">High foot traffic. Pop-up and sampling ready.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v1')"><div class="opt-title">Industry event IP · conference · expo · trade show</div><div class="opt-sub">B2B audience. Direct buyer access.</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',0)">Back</button><button class="btn-next" id="v1-next" type="button" onclick="next('v',2)" disabled>Next</button></div>
+</div>
+
+<!-- Step 3: LIVE engagement format -->
+<div class="screen" id="v2">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">What kind of LIVE engagement do you host?</div>
+  <div class="sub">altr matches short to mid-length activations — typically a few days to ~3 months. Pick what's closest to your usual format.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">1-day moment · single-day activation</div><div class="opt-sub">Brand integration on event day. Sampling, demo, stage moment.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Short pop-up (3–14 days)</div><div class="opt-sub">Festival booth, flash store, week-long brand zone.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Mid-term residency (1–3 months)</div><div class="opt-sub">Seasonal pop-up, themed activation, multi-week residency.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Mix of formats — flexible</div><div class="opt-sub">Different brands, different durations across the calendar.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v2')"><div class="opt-title">Longer integrations (3+ months)</div><div class="opt-sub">Outside altr's current matching scope — we'll note for future.</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',1)">Back</button><button class="btn-next" id="v2-next" type="button" onclick="next('v',3)" disabled>Next</button></div>
+</div>
+
+<!-- Step 4: Audience per engagement -->
+<div class="screen" id="v3">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">How many people show up per engagement?</div>
+  <div class="sub">Per pop-up, per residency, per event — not annual. Tells us which K-brand budgets fit your scale.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">Under 1,000 per engagement</div><div class="opt-sub">Boutique · invitation-only · members club</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">1,000 — 10,000 per engagement</div><div class="opt-sub">Mid-tier venue or curated event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">10,000 — 100,000 per engagement</div><div class="opt-sub">Major venue · multi-day event</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">100,000 — 500,000 per engagement</div><div class="opt-sub">Large-scale event · destination property</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v3')"><div class="opt-title">500,000+ per engagement</div><div class="opt-sub">Flagship · mega-event · stadium-class</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',2)">Back</button><button class="btn-next" id="v3-next" type="button" onclick="next('v',4)" disabled>Next</button></div>
+</div>
+
+<!-- Step 5: Brand preference -->
+<div class="screen" id="v4">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">What kind of brand partner are you looking for?</div>
+  <div class="sub">We'll prioritise the brands on our waitlist that match your audience and programming needs.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-food &amp; beverage</div><div class="opt-sub">pop-up, sampling, tasting</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-beauty &amp; wellness</div><div class="opt-sub">demo booth, experience zone</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-fashion &amp; lifestyle</div><div class="opt-sub">pop-up store, showroom</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">K-entertainment &amp; IP</div><div class="opt-sub">fan activation, immersive experience</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Multiple categories</div><div class="opt-sub">show us everything available</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v4')"><div class="opt-title">Traditional sponsor</div><div class="opt-sub">capital sponsor with activation budget</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',3)">Back</button><button class="btn-next" id="v4-next" type="button" onclick="next('v',5)" disabled>Next</button></div>
+</div>
+
+<!-- Step 6: Partnership model -->
+<div class="screen" id="v5">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">How do you partner with brands?</div>
+  <div class="sub">Sets which deal structures we'll match you with. No wrong answer — but the right brands depend on this.</div>
+  <div class="opts">
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Revenue share (RS)</div><div class="opt-sub">No upfront · share on sales or activations. Lowers barrier for K-brand pilots.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Capital sponsorship</div><div class="opt-sub">Brand pays activation fee upfront. Best for proven brands with launch budgets.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Open to both</div><div class="opt-sub">Depends on the brand and the slot — we evaluate case by case.</div></button>
+    <button class="opt-btn" type="button" onclick="pick(this,'v5')"><div class="opt-title">Not sure yet</div><div class="opt-sub">We'll figure out the right model together at onboarding.</div></button>
+  </div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',4)">Back</button><button class="btn-next" id="v5-next" type="button" onclick="next('v',6)" disabled>Next</button></div>
+</div>
+
+<!-- Step 7: Slots + Contact -->
+<div class="screen" id="v6">
+  <span class="pill pill-teal">Global Live IP · GCC</span>
+  <div class="q">Last step — slots and contact.</div>
+  <div class="sub">How many brand engagements to line up over the next 12 months, and where to reach you.</div>
+
+  <div class="merged-section">
+    <div class="merged-label">Brand engagements in the next 12 months</div>
+    <div class="opts" id="v-slots-opts">
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">1–3 — selective and curated</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">4–10 — regular programming</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">10+ — ongoing partner cadence</div></button>
+      <button class="opt-btn" type="button" onclick="pick(this,'v_slots')"><div class="opt-title">Flexible — depends on the fit</div></button>
+    </div>
+  </div>
+
+  <div class="merged-divider"></div>
+
+  <div class="merged-section">
+    <div class="merged-label">Your contact</div>
+    <input class="inp" name="org" type="text" placeholder="Stage name" autocomplete="organization">
+    <input class="inp" name="name" type="text" placeholder="Your name + role" autocomplete="name">
+    <input class="inp" name="email" type="email" placeholder="Work email" autocomplete="email">
+  </div>
+
+  <div class="errmsg" id="v-err" hidden></div>
+  <div class="nav"><button class="btn-back" type="button" onclick="back('v',5)">Back</button><button class="btn-next" id="v-submit" type="button" onclick="submit('v')">Find my K-content matches →</button></div>
+</div>
+
+<!-- Success -->
+<div class="screen" id="v7">
+  <span class="pill pill-teal">You're on the list</span>
+  <div class="q">Brands already waiting for your GCC stage</div>
+  <div class="sub">These K-content categories have brands on our waitlist looking for GCC activation partners.</div>
+  <div class="perks">
+    <div class="perks-title">Founding Live IP receive</div>
+    <ul>
+      <li>First-look — see incoming K-brand requests before non-founding peers</li>
+      <li>Permanent founding badge on your altr profile</li>
+      <li>Direct intros to founding K-brands</li>
+    </ul>
+  </div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-F&amp;B brand · ready to launch</div><div style="font-size:12px;color:#888780">Budget $10–50K · first market entry</div></div><span class="match-tag">3 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">K-beauty brand · activation-ready</div><div style="font-size:12px;color:#888780">Budget $10–50K · experience-led</div></div><span class="match-tag">2 brands</span></div>
+  <div class="match-card"><div class="match-left"><div style="font-weight:500;margin-bottom:2px">Large sponsor · live activation</div><div style="font-size:12px;color:#888780">Budget $200K+ · anchor partner</div></div><span class="match-tag">Intro available</span></div>
+  <div style="font-size:12px;color:#888780;margin-top:1rem">Know another Live IP in GCC? Refer them and we'll prioritise your first match.</div>
+  <button class="refer-btn" type="button" onclick="copyShare(this)">Copy share link</button>
+</div>
+
+<footer class="foot">
+  <span>altr — find your stage · be the stage</span>
+  <a href="mailto:hello@altr.haus">hello@altr.haus</a>
+</footer>
+
+</div><!-- /.card -->
+
+</div><!-- /.page -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="/app.js"></script>
+<script>
+// GCC campaign: pre-set region (we already know they're in GCC from ad targeting)
+// and ensure the UTM gets captured even if LinkedIn omits it on direct nav
+(function() {
+  state.answers.v_region = 'UAE / Saudi Arabia / GCC';
+  if (!URL_PARAMS.utm_source) URL_PARAMS.utm_source = 'linkedin';
+  if (!URL_PARAMS.utm_campaign) URL_PARAMS.utm_campaign = 'gcc_rh';
+})();
+
+// City picker — 5 specific options OR "Other GCC" with text input
+function pickGccCity(el, isOther) {
+  document.querySelectorAll('#v0 .opt-btn').forEach(b => b.classList.remove('sel'));
+  el.classList.add('sel');
+  const input = document.getElementById('v_other_gcc');
+  if (isOther) {
+    input.hidden = false;
+    input.focus();
+    const v = input.value.trim();
+    if (v) {
+      state.answers.v0 = 'Other GCC: ' + v;
+      document.getElementById('v0-next').removeAttribute('disabled');
+    } else {
+      delete state.answers.v0;
+      document.getElementById('v0-next').setAttribute('disabled', '');
+    }
+  } else {
+    input.hidden = true;
+    input.value = '';
+    const title = el.querySelector('.opt-title');
+    state.answers.v0 = title.textContent.trim();
+    document.getElementById('v0-next').removeAttribute('disabled');
+  }
+}
+
+function onOtherGccInput() {
+  const input = document.getElementById('v_other_gcc');
+  const v = input.value.trim();
+  if (v) {
+    state.answers.v0 = 'Other GCC: ' + v;
+    document.getElementById('v0-next').removeAttribute('disabled');
+  } else {
+    delete state.answers.v0;
+    document.getElementById('v0-next').setAttribute('disabled', '');
+  }
+}
+</script>
+</body>
 </html>

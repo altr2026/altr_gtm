@@ -649,8 +649,10 @@ function copyShare(btn) {
       ln2El.innerHTML = CAMPAIGN_LN2[campaign];
     }
 
-    // LinkedIn venue traffic already knows they're a venue → skip Property type
-    const startStep = (side === 'v' && src === 'linkedin') ? 1 : 0;
+    // LinkedIn venue traffic normally skips v0 (Property type) — campaign pages
+    // with their own first screen opt out via data-no-skip="true"
+    const noSkip = document.body.dataset.noSkip === 'true';
+    const startStep = (!noSkip && side === 'v' && src === 'linkedin') ? 1 : 0;
     startSide(side, false, startStep);
     return;
   }
